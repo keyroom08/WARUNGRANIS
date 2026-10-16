@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Umi Ranis</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fffaf0;
+    color: #24352b;
+}
+
+header {
+    background: #217a4a;
+    color: white;
+    padding: 22px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 25px auto;
+    padding: 15px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 16px;
+    border: 1px solid #e5e9df;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 12px;
+    margin: 6px 0;
+    border-radius: 9px;
+    border: 1px solid #ddd;
+    font-size: 15px;
+}
+
+button {
+    background: #217a4a;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    opacity: .9;
+}
+
+.delete {
+    background: #d94b43;
+}
+
+.cancel {
+    background: #68776c;
+}
+
+.product {
+    border-bottom: 1px solid #eee;
+    padding: 16px 0;
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.product img {
+    width: 95px;
+    height: 95px;
+    object-fit: cover;
+    border-radius: 12px;
+    background: #e5f5df;
+}
+
+.product-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.price {
+    color: #217a4a;
+    font-weight: bold;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 12px;
+    font-size: 14px;
+}
+
+.hint {
+    font-size: 12px;
+    color: #68776c;
+    line-height: 1.5;
+}
+
+#preview {
+    display: none;
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    border-radius: 12px;
+    margin-top: 10px;
+    background: #f2f5ed;
+}
+
+.back {
+    display: block;
+    text-align: center;
+    color: #217a4a;
+    margin: 20px;
+    text-decoration: none;
+}
+
+@media(max-width:500px) {
+    .product img {
+        width: 75px;
+        height: 75px;
+    }
+
+    .card {
+        padding: 14px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🛒 Umi Ranis</h1>
+    <p>Dashboard Pengelolaan Produk</p>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2 id="formTitle">➕ Tambah Produk</h2>
+
+        <form id="productForm">
+
+            <label>Nama Produk</label>
+            <input
+                type="text"
+                id="name"
+                placeholder="Contoh: Minyak Goreng 1 L"
+                required
+            >
+
+            <label>Kategori</label>
+            <select id="category">
+                <option value="Sembako">🌾 Sembako</option>
+                <option value="Makanan">🍜 Makanan</option>
+                <option value="Minuman">🥤 Minuman</option>
+                <option value="Rumah tangga">🧼 Rumah tangga</option>
+            </select>
+
+            <label>Harga Jual (Rp)</label>
+            <input
+                type="number"
+                id="price"
+                placeholder="Contoh: 18000"
+                min="1"
+                required
+            >
+
+            <label>Jumlah Stok</label>
+            <input
+                type="number"
+                id="stock"
+                placeholder="Contoh: 20"
+                min="0"
+                required
+            >
+
+            <hr style="border:0;border-top:1px solid #eee;margin:20px 0">
+
+            <h3>📸 Foto Produk</h3>
+
+            <label>Opsi 1 — Upload foto dari komputer</label>
+            <input
+                type="file"
+                id="photoFile"
+                accept="image/*"
+            >
+
+            <p class="hint">
+                Pilih foto dari komputer. Foto akan diperkecil
+                otomatis agar lebih hemat penyimpanan.
+            </p>
+
+            <label>Opsi 2 — Masukkan URL foto</label>
+            <input
+                type="url"
+                id="photoUrl"
+                placeholder="https://contoh.com/foto-produk.jpg"
+            >
+
+            <p class="hint">
+                Jika URL diisi, URL akan digunakan sebagai foto produk.
+                Jika kosong, foto yang di-upload akan digunakan.
+            </p>
+
+            <img id="preview" alt="Pratinjau foto produk">
+
+            <button type="submit" id="saveButton">
+                💾 Simpan Produk
+            </button>
+
+            <button
+                type="button"
+                id="cancelButton"
+                class="cancel"
+                hidden
+            >
+                Batal Edit
+            </button>
+
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>📦 Daftar Produk</h2>
+        <div id="productList"></div>
+    </div>
+
+    <a class="back" href="index.html">
+        ← Kembali ke Katalog Pembeli
+    </a>
+
+</div>
+
+<script>
+const STORAGE_KEY = "umiRanisAdminProducts";
+
+let products = [];
+
+try {
+    products = JSON.parse(
+        localStorage.getItem(STORAGE_KEY) || "[]"
+    );
+
+    if (!Array.isArray(products)) {
+        products = [];
+    }
+} catch {
+    products = [];
+}
+
+let editingId = null;
+let uploadedPhoto = "";
+
+const form = document.getElementById("productForm");
+const productList = document.getElementById("productList");
+const photoFile = document.getElementById("photoFile");
+const photoUrl = document.getElementById("photoUrl");
+const preview = document.getElementById("preview");
+
+function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[char]);
+}
+
+function saveProducts() {
+    try {
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(products)
+        );
+
+        renderProducts();
+        return true;
+    } catch (error) {
+        alert(
+            "Penyimpanan browser penuh atau tidak tersedia. " +
+            "Coba gunakan foto yang lebih kecil."
+        );
+
+        return false;
+    }
+}
+
+function showPreview(src) {
+    if (!src) {
+        preview.removeAttribute("src");
+        preview.style.display = "none";
+        return;
+    }
+
+    preview.src = src;
+    preview.style.display = "block";
+}
+
+function getImage(p) {
+    return p.photo || "";
+}
+
+function renderProducts() {
+    if (products.length === 0) {
+        productList.innerHTML =
+            "<p>Belum ada produk. Yuk, tambahkan barang!</p>";
+        return;
+    }
+
+    productList.innerHTML = products.map(p => {
+        const image = getImage(p);
+
+        return `
+            <div class="product">
+                ${
+                    image
+                    ? `<img src="${escapeHTML(image)}"
+                         alt="${escapeHTML(p.name)}">`
+                    : `<div style="
+                        width:95px;height:95px;
+                        border-radius:12px;
+                        background:#e5f5df;
+                        display:grid;
+                        place-items:center;
+                        font-size:35px;">🛍️</div>`
+                }
+
+                <div class="product-info">
+                    <strong>${escapeHTML(p.name)}</strong>
+
+                    <p>${escapeHTML(p.category)}</p>
+
+                    <p class="price">
+                        Rp${Number(p.price).toLocaleString("id-ID")}
+                    </p>
+
+                    <p>Stok: ${Number(p.stock)}</p>
+
+                    <button
+                        type="button"
+                        onclick="editProduct(${Number(p.id)})">
+                        ✏️ Edit
+                    </button>
+
+                    <button
+                        type="button"
+                        class="delete"
+                        onclick="deleteProduct(${Number(p.id)})">
+                        🗑️ Hapus
+                    </button>
+                </div>
+            </div>
+        `;
+    }).join("");
+}
+
+// Memperkecil foto agar lebih hemat penyimpanan browser.
+function compressPhoto(file) {
+    return new Promise((resolve, reject) => {
+        if (!file.type.startsWith("image/")) {
+            reject(new Error("File harus berupa gambar."));
+            return;
+        }
+
+        const reader = new FileReader();
+
+        reader.onerror = () => {
+            reject(new Error("Foto gagal dibaca."));
+        };
+
+        reader.onload = () => {
+            const img = new Image();
+
+            img.onerror = () => {
+                reject(new Error("Foto tidak dapat dibuka."));
+            };
+
+            img.onload = () => {
+                const maxSize = 700;
+
+                const scale = Math.min(
+                    1,
+                    maxSize / Math.max(img.width, img.height)
+                );
+
+                const canvas = document.createElement("canvas");
+
+                canvas.width = Math.max(
+                    1, Math.round(img.width * scale)
+                );
+
+                canvas.height = Math.max(
+                    1, Math.round(img.height * scale)
+                );
+
+                const ctx = canvas.getContext("2d");
+
+                ctx.drawImage(
+                    img, 0, 0, canvas.width, canvas.height
+                );
+
+                resolve(
+                    canvas.toDataURL("image/jpeg", 0.75)
+                );
+            };
+
+            img.src = reader.result;
+        };
+
+        reader.readAsDataURL(file);
+    });
+}
+
+photoFile.addEventListener("change", async () => {
+    const file = photoFile.files[0];
+
+    if (!file) return;
+
+    if (file.size > 8 * 1024 * 1024) {
+        alert("Ukuran foto maksimal 8 MB.");
+        photoFile.value = "";
+        return;
+    }
+
+    try {
+        uploadedPhoto = await compressPhoto(file);
+        photoUrl.value = "";
+        showPreview(uploadedPhoto);
+    } catch (error) {
+        alert(error.message || "Foto gagal diproses.");
+    }
+});
+
+photoUrl.addEventListener("input", () => {
+    const url = photoUrl.value.trim();
+
+    if (!url) {
+        showPreview(uploadedPhoto);
+        return;
+    }
+
+    try {
+        const parsed = new URL(url);
+
+        if (parsed.protocol !== "https:" &&
+            parsed.protocol !== "http:") {
+            showPreview("");
+            return;
+        }
+
+        showPreview(url);
+    } catch {
+        showPreview("");
+    }
+
+    // Jika URL diisi, URL menjadi sumber foto yang dipakai.
+});
+
+form.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const category = document.getElementById("category").value;
+    const price = Number(document.getElementById("price").value);
+    const stock = Number(document.getElementById("stock").value);
+    const url = photoUrl.value.trim();
+
+    if (!name || !Number.isFinite(price) || price <= 0 ||
+        !Number.isInteger(stock) || stock < 0) {
+        alert("Periksa kembali nama, harga, dan stok produk.");
+        return;
+    }
+
+    let photo = uploadedPhoto;
+
+    if (url) {
+        try {
+            const parsed = new URL(url);
+
+            if (parsed.protocol !== "https:" &&
+                parsed.protocol !== "http:") {
+                alert("URL foto harus menggunakan HTTP atau HTTPS.");
+                return;
+            }
+
+            photo = url;
+        } catch {
+            alert("URL foto tidak valid.");
+            return;
+        }
+    }
+
+    if (editingId !== null) {
+        const index = products.findIndex(
+            p => p.id === editingId
+        );
+
+        if (index !== -1) {
+            products[index] = {
+                ...products[index],
+                name,
+                category,
+                price,
+                stock,
+                photo
+            };
+        }
+    } else {
+        products.push({
+            id: Date.now(),
+            name,
+            category,
+            price,
+            stock,
+            photo
+        });
+    }
+
+    if (saveProducts()) {
+        alert("Produk berhasil disimpan di browser!");
+        resetForm();
+    }
+});
+
+function editProduct(id) {
+    const p = products.find(item => item.id === id);
+
+    if (!p) return;
+
+    editingId = id;
+
+    document.getElementById("name").value = p.name;
+    document.getElementById("category").value = p.category;
+    document.getElementById("price").value = p.price;
+    document.getElementById("stock").value = p.stock;
+
+    uploadedPhoto = "";
+
+    if (p.photo && p.photo.startsWith("data:image/")) {
+        uploadedPhoto = p.photo;
+        photoUrl.value = "";
+    } else {
+        photoUrl.value = p.photo || "";
+    }
+
+    photoFile.value = "";
+    showPreview(p.photo || "");
+
+    document.getElementById("formTitle").textContent =
+        "✏️ Edit Produk";
+
+    document.getElementById("saveButton").textContent =
+        "💾 Simpan Perubahan";
+
+    document.getElementById("cancelButton").hidden = false;
+
+    form.scrollIntoView({ behavior: "smooth" });
+}
+
+function deleteProduct(id) {
+    if (!confirm("Yakin ingin menghapus produk ini?")) {
+        return;
+    }
+
+    products = products.filter(p => p.id !== id);
+
+    if (saveProducts()) {
+        if (editingId === id) {
+            resetForm();
+        }
+
+        alert("Produk berhasil dihapus.");
+    }
+}
+
+function resetForm() {
+    form.reset();
+
+    editingId = null;
+    uploadedPhoto = "";
+
+    showPreview("");
+
+    document.getElementById("formTitle").textContent =
+        "➕ Tambah Produk";
+
+    document.getElementById("saveButton").textContent =
+        "💾 Simpan Produk";
+
+    document.getElementById("cancelButton").hidden = true;
+}
+
+document.getElementById("cancelButton")
+    .addEventListener("click", resetForm);
+
+renderProducts();
+</script>
+
+</body>
+</html>
