@@ -4,7 +4,23 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Umi Ranis — Katalog Warung</title>
 <style>
-:root{--green:#217a4a;--green2:#dff5df;--orange:#ffb84d;--pink:#ffdfd7;--cream:#fffaf0;--ink:#24352b;--muted:#68776c;--line:#e5e9df;--white:#fff;--shadow:0 12px 30px #244b3010}*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}button,input{font:inherit}button{cursor:pointer}.topnote{background:#205d3d;color:#fff;text-align:center;padding:8px 12px;font-size:12px}.wrap{max-width:1180px;margin:auto;padding:0 22px}.header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0}.brand{display:flex;align-items:center;gap:12px}.logo{width:52px;height:52px;border-radius:18px;background:var(--orange);display:grid;place-items:center;font-size:27px;box-shadow:4px 4px 0 #f5d28e}.brand h1{font-size:23px;line-height:1;margin:0;font-weight:900;letter-spacing:-.7px}.brand p{margin:5px 0 0;color:var(--muted);font-size:12px}.cart-button{border:0;background:var(--green);color:white;padding:12px 16px;border-radius:14px;font-weight:800;box-shadow:var(--shadow)}.floating-cart{position:fixed;right:20px;bottom:20px;z-index:9;border:0;background:var(--green);color:#fff;padding:14px 18px;border-radius:999px;font-weight:850;box-shadow:0 10px 28px #14241940;display:flex;align-items:center;gap:7px}.floating-cart .cart-count{margin-left:2px}.cart-count{display:inline-grid;place-items:center;background:#fff;color:var(--green);border-radius:50%;min-width:22px;height:22px;margin-left:6px;font-size:12px}.hero{background:linear-gradient(120deg,#e2f6df,#fff0ce 70%,#ffe0d8);border:1px solid #d9ebd2;border-radius:28px;padding:32px;display:grid;grid-template-columns:1.3fr .7fr;align-items:center;gap:18px;overflow:hidden}.eyebrow{color:var(--green);font-size:12px;letter-spacing:1.6px;font-weight:900;text-transform:uppercase}.hero h2{font-size:clamp(30px,4vw,48px);line-height:1.05;letter-spacing:-1.7px;margin:12px 0}.hero p{max-width:560px;color:#526657;line-height:1.7;margin:0 0 20px}.hero-tags{display:flex;gap:8px;flex-wrap:wrap}.pill{display:inline-flex;align-items:center;background:#fff9;border:1px solid #dce8d5;border-radius:999px;padding:7px 11px;font-size:12px;font-weight:750}.hero-art{font-size:95px;text-align:center;transform:rotate(-5deg);filter:drop-shadow(0 10px 8px #7b8b5420)}.search-row{display:flex;gap:12px;margin:26px 0 16px}.search{flex:1;min-width:0;border:1px solid var(--line);background:white;border-radius:14px;padding:14px 16px;outline:none}.search:focus{border-color:#79b68b;box-shadow:0 0 0 3px #dff5df}.category-row{display:flex;gap:8px;overflow-x:auto;padding:2px 0 10px}.cat{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 14px;color:#526657;font-weight:750;font-size:13px}.cat.active{background:var(--green);border-color:var(--green);color:#fff}.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:16px 0}.section-head h3{margin:0;font-size:21px;letter-spacing:-.5px}.section-head p{margin:5px 0 0;color:var(--muted);font-size:13px}.product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}.product{background:white;border:1px solid var(--line);border-radius:20px;padding:14px;box-shadow:0 4px 15px #233c2410;display:flex;flex-direction:column;min-width:0}
+:root{--green:#217a4a;--green2:#dff5df;--orange:#ffb84d;--pink:#ffdfd7;--cream:#fffaf0;--ink:#24352b;--muted:#68776c;--line:#e5e9df;--white:#fff;--shadow:0 12px 30px #244b3010}*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}button,input{font:inherit}button{cursor:pointer}.topnote{background:#205d3d;color:#fff;text-align:center;padding:8px 12px;font-size:12px}.wrap{max-width:1180px;margin:auto;padding:0 22px}.header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0}.brand{display:flex;align-items:center;gap:12px}.logo{width:52px;height:52px;border-radius:18px;background:var(--orange);display:grid;place-items:center;font-size:27px;box-shadow:4px 4px 0 #f5d28e}.brand h1{font-size:23px;line-height:1;margin:0;font-weight:900;letter-spacing:-.7px}.brand p{margin:5px 0 0;color:var(--muted);font-size:12px}.cart-button{border:0;background:var(--green);color:white;padding:12px 16px;border-radius:14px;font-weight:800;box-shadow:var(--shadow)}.floating-cart{position:fixed;right:20px;bottom:20px;z-index:9;border:0;background:var(--green);color:#fff;padding:14px 18px;border-radius:999px;font-weight:850;box-shadow:0 10px 28px #14241940;display:flex;align-items:center;gap:7px}.floating-cart .cart-count{margin-left:2px}.cart-count{display:inline-grid;place-items:center;background:#fff;color:var(--green);border-radius:50%;min-width:22px;height:22px;margin-left:6px;font-size:12px}.hero{background:linear-gradient(120deg,#e2f6df,#fff0ce 70%,#ffe0d8);border:1px solid #d9ebd2;border-radius:28px;padding:32px;display:grid;grid-template-columns:1.3fr .7fr;align-items:center;gap:18px;overflow:hidden}.eyebrow{color:var(--green);font-size:12px;letter-spacing:1.6px;font-weight:900;text-transform:uppercase}.hero h2{font-size:clamp(30px,4vw,48px);line-height:1.05;letter-spacing:-1.7px;margin:12px 0}.hero p{max-width:560px;color:#526657;line-height:1.7;margin:0 0 20px}.hero-tags{display:flex;gap:8px;flex-wrap:wrap}.pill{display:inline-flex;align-items:center;background:#fff9;border:1px solid #dce8d5;border-radius:999px;padding:7px 11px;font-size:12px;font-weight:750}.hero-art{font-size:95px;text-align:center;transform:rotate(-5deg);filter:drop-shadow(0 10px 8px #7b8b5420)}.search-row{display:flex;gap:12px;margin:26px 0 16px}
+
+/* Pencarian dan kategori tetap terlihat saat halaman di-scroll */
+.catalog-tools {
+    position: sticky;
+    top: 0;
+    z-index: 8;
+    background: var(--cream);
+    padding-top: 1px;
+    padding-bottom: 3px;
+}
+
+.catalog-tools .search-row {
+    margin-top: 26px;
+}
+
+.search{flex:1;min-width:0;border:1px solid var(--line);background:white;border-radius:14px;padding:14px 16px;outline:none}.search:focus{border-color:#79b68b;box-shadow:0 0 0 3px #dff5df}.category-row{display:flex;gap:8px;overflow-x:auto;padding:2px 0 10px}.cat{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 14px;color:#526657;font-weight:750;font-size:13px}.cat.active{background:var(--green);border-color:var(--green);color:#fff}.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:16px 0}.section-head h3{margin:0;font-size:21px;letter-spacing:-.5px}.section-head p{margin:5px 0 0;color:var(--muted);font-size:13px}.product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}.product{background:white;border:1px solid var(--line);border-radius:20px;padding:14px;box-shadow:0 4px 15px #233c2410;display:flex;flex-direction:column;min-width:0}
 
 .product-art{
 	height:116px;
@@ -39,7 +55,8 @@
 }
 
 .product h4{font-size:15px;margin:5px 0 8px;line-height:1.3}.price-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto}.price{font-size:17px;font-weight:900;color:var(--green)}.unit{font-size:11px;color:var(--muted)}.add{border:0;border-radius:11px;background:var(--orange);color:#46300b;font-weight:900;width:38px;height:38px;font-size:22px}.add:hover{filter:brightness(.97)}.stock{font-size:11px;color:#6b7c6d;margin-top:8px}.empty{grid-column:1/-1;text-align:center;background:white;border:1px dashed var(--line);padding:40px;border-radius:18px;color:var(--muted)}.info-strip{margin:28px 0;background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.info{display:flex;gap:10px;align-items:start}.info-icon{font-size:24px}.info strong{display:block;font-size:13px}.info span{display:block;font-size:12px;color:var(--muted);line-height:1.5;margin-top:4px}.footer{padding:20px 0 32px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:12px}.overlay{position:fixed;inset:0;background:#14241980;z-index:10;display:none;justify-content:flex-end}.overlay.open{display:flex}.drawer{width:min(440px,100%);height:100%;background:var(--cream);padding:22px;overflow:auto;box-shadow:-12px 0 35px #0002}.drawer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.drawer-head h3{margin:0;font-size:22px}.close{border:1px solid var(--line);background:white;border-radius:10px;width:38px;height:38px;font-size:21px}.cart-empty{text-align:center;padding:34px 8px;color:var(--muted)}.cart-item{display:grid;grid-template-columns:1fr auto;gap:10px;padding:13px 0;border-bottom:1px solid var(--line)}.cart-item strong{font-size:14px}.cart-item small{display:block;color:var(--muted);margin-top:4px}.qty{display:flex;align-items:center;gap:9px}.qty button{border:1px solid var(--line);background:white;border-radius:8px;width:29px;height:29px;font-weight:900}.totals{border-top:2px dashed #d9dfd4;margin-top:18px;padding-top:16px}.total-line{display:flex;justify-content:space-between;margin:8px 0;color:var(--muted);font-size:14px}.total-line.final{color:var(--ink);font-size:19px;font-weight:900}.checkout{width:100%;border:0;border-radius:13px;padding:14px;background:var(--green);color:white;font-weight:850;margin-top:14px}.checkout:disabled{opacity:.55;cursor:not-allowed}.notice{background:#fff1cf;color:#775313;border:1px solid #f2d997;border-radius:12px;padding:11px;font-size:12px;line-height:1.5;margin-top:12px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1e5337;color:#fff;padding:12px 16px;border-radius:12px;box-shadow:var(--shadow);display:none;z-index:20;font-size:13px}.toast.show{display:block}.admin-note{font-size:12px;color:var(--muted);background:#f0f5eb;padding:12px;border-radius:12px;margin:18px 0 0}
-@media(max-width:900px){.product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{padding:26px}.hero-art{font-size:76px}}@media(max-width:650px){.wrap{padding:0 14px}.header{padding:16px 0}.brand h1{font-size:20px}.logo{width:46px;height:46px}.hero{grid-template-columns:1fr;padding:23px;border-radius:22px}.hero-art{display:none}.hero h2{font-size:35px}.search-row{margin-top:20px}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.product{padding:10px;border-radius:16px}.product-art{height:95px;font-size:44px}.product h4{font-size:13px}.price{font-size:15px}.info-strip{grid-template-columns:1fr;gap:14px}.section-head h3{font-size:19px}.footer{flex-direction:column}.cart-button{padding:10px 12px;font-size:12px}.floating-cart{right:12px;bottom:12px;padding:12px 15px}}
+@media(max-width:900px){.product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{padding:26px}.hero-art{font-size:76px}}@media(max-width:650px){.wrap{padding:0 14px}.header{padding:16px 0}.brand h1{font-size:20px}.logo{width:46px;height:46px}.hero{grid-template-columns:1fr;padding:23px;border-radius:22px}.hero-art{display:none}.hero h2{font-size:35px}.search-row{margin-top:20px}.catalog-tools .search-row {
+    margin-top: 20px;}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.product{padding:10px;border-radius:16px}.product-art{height:95px;font-size:44px}.product h4{font-size:13px}.price{font-size:15px}.info-strip{grid-template-columns:1fr;gap:14px}.section-head h3{font-size:19px}.footer{flex-direction:column}.cart-button{padding:10px 12px;font-size:12px}.floating-cart{right:12px;bottom:12px;padding:12px 15px}}
 
 /* Nama produk */
 .product-name {
@@ -77,17 +94,62 @@
     margin-bottom: 8px;
 }
 
+.footer strong {
+    color: #15803d;
+    font-weight: 800;
+}
+
+/* Tombol kembali ke atas */
+.back-to-top {
+    position: fixed;
+    right: 20px;
+    bottom: 82px;
+    z-index: 8;
+
+    width: 46px;
+    height: 46px;
+    border: 1px solid #d7e8d8;
+    border-radius: 50%;
+
+    background: white;
+    color: #217a4a;
+    font-size: 24px;
+    font-weight: bold;
+
+    display: grid;
+    place-items: center;
+
+    box-shadow: 0 8px 24px #14241925;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+
+    transition: opacity .2s, transform .2s, visibility .2s;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background: #217a4a;
+    color: white;
+}
+
+@media (max-width: 650px) {
+    .back-to-top {
+        right: 12px;
+        bottom: 76px;
+        width: 42px;
+        height: 42px;
+    }
+}
+
+
 </style>
-
-<!-- Preview saat link dibagikan -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="Warung Umi Ranis">
-<meta property="og:description" content="Belanja kebutuhan harian dengan mudah di Warung Umi Ranis!">
-<meta property="og:url" content="https://keyroom08.github.io/WARUNGRANIS/">
-<meta property="og:image" content="https://keyroom08.github.io/WARUNGRANIS/preview.jpg">
-
-<meta name="twitter:card" content="summary_large_image">
-	
 </head>
 <body>
 <div class="topnote">🌼 Belanja kebutuhan harian lebih mudah · Harga jelas · WhatsApp: 089658739582</div>
@@ -112,22 +174,58 @@
             🔐 Login Admin
         </button>
 
-        <button class="cart-button" id="openCart" type="button">
-            🛍️ Keranjang
-            <span class="cart-count" id="cartCount">0</span>
-        </button>
     </div>
 </header>
 
-<section class="hero"><div><div class="eyebrow">Selamat datang di warung kami</div><h2>Belanja harian,<br>jadi lebih gampang!</h2><p>Cari sembako, camilan, minuman, dan kebutuhan rumah tanpa harus bingung. Pilih barang, cek total belanja, lalu kirim pesanan ke Umi Ranis.</p><div class="hero-tags"><span class="pill">🌾 Sembako</span><span class="pill">🍜 Makanan & minuman</span><span class="pill">🧼 Kebutuhan rumah</span></div></div><div class="hero-art" aria-hidden="true">🧺🥚🥛</div></section>
-<div class="search-row"><input id="search" class="search" type="search" placeholder="🔎 Cari beras, minyak, mi instan..." aria-label="Cari produk"></div>
-<div class="category-row" id="categories"><button class="cat active" data-cat="Semua">Semua</button><button class="cat" data-cat="Sembako">🌾 Sembako</button><button class="cat" data-cat="Makanan">🍜 Makanan</button><button class="cat" data-cat="Minuman">🥤 Minuman</button><button class="cat" data-cat="Rumah tangga">🧼 Rumah tangga</button></div>
+<section class="hero"><div><div class="eyebrow">Selamat datang di warung kami</div><h2>Belanja harian,<br>jadi lebih gampang!</h2><p>Cari sembako, camilan, minuman, dan kebutuhan rumah tanpa harus bingung. Pilih barang, cek total belanja, lalu kirim pesanan ke Umi Ranis.</p>
+
+<div class="hero-tags">
+    <span class="pill">🌾 Sembako</span>
+    <span class="pill">🍜 Makanan & minuman</span>
+    <span class="pill">🧼 Kebutuhan rumah</span>
+    <span class="pill">💊 Obat-obatan</span>
+</div>
+
+</div><div class="hero-art" aria-hidden="true">🧺🥚🥛</div></section>
+
+<div class="catalog-tools">
+
+    <div class="search-row">
+        <input id="search" class="search" type="search" placeholder="🔎 Cari beras, minyak, mi instan..." aria-label="Cari produk">
+    </div>
+
+    <div class="category-row" id="categories">
+        <button class="cat active" data-cat="Semua">Semua</button>
+        <button class="cat" data-cat="Sembako">🌾 Sembako</button>
+        <button class="cat" data-cat="Makanan">🍜 Makanan</button>
+        <button class="cat" data-cat="Minuman">🥤 Minuman</button>
+        <button class="cat" data-cat="Kebutuhan rumah">🧼 Kebutuhan rumah</button>
+        <button class="cat" data-cat="Obat-obatan">💊 Obat-obatan</button>
+    </div>
+
+</div>
+
+
 <div class="section-head"><div><h3>Belanja kebutuhanmu 💛</h3><p>Pilih barang untuk memasukkannya ke keranjang.</p></div></div>
 <section class="product-grid" id="products" aria-live="polite"></section>
 <div class="info-strip"><div class="info"><div class="info-icon">🏡</div><div><strong>Warung dekat rumah</strong><span>Kebutuhan sehari-hari tersedia di satu tempat.</span></div></div><div class="info"><div class="info-icon">🧾</div><div><strong>Total belanja transparan</strong><span>Periksa jumlah dan total sebelum mengirim pesanan.</span></div></div><div class="info"><div class="info-icon">💬</div><div><strong>Pesan lewat WhatsApp</strong><span>Pesanan dikirim setelah kamu menekan tombol konfirmasi.</span></div></div></div>
-<div class="admin-note">Pratinjau katalog awal Umi Ranis. Produk dan harga di halaman ini masih contoh, belum terhubung ke database atau stok nyata.</div>
-<footer class="footer"><span>© <span id="year"></span> Umi Ranis · Katalog Warung</span><span>Dibuat untuk memudahkan belanja sehari-hari 💚</span></footer>
+
+<div class="admin-note">
+    Pratinjau katalog awal Umi Ranis. Produk dan harga di halaman ini akan di update apabila ada perubahan harga.
 </div>
+
+<footer class="footer">
+    <span>© <span id="year"></span> Umi Ranis · Katalog Warung</span>
+
+    <span>
+        Dibuat untuk memudahkan belanja sehari-hari 💚
+    </span>
+
+    <span>
+        Website dikembangkan oleh <strong>JAHDA KIROM</strong> 💻
+    </span>
+</footer>
+
 
 <!-- POP-UP LOGIN ADMIN -->
 <div
@@ -209,6 +307,16 @@
 
 <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Keranjang belanja"><aside class="drawer"><div class="drawer-head"><h3>Keranjang belanja 🛒</h3><button class="close" id="closeCart" aria-label="Tutup keranjang">×</button></div><div id="cartItems"></div><div class="totals" id="totals" hidden><div class="total-line"><span>Jumlah barang</span><strong id="totalQty">0</strong></div><div class="total-line final"><span>Total belanja</span><strong id="totalPrice">Rp0</strong></div><button class="checkout" id="checkout">Lanjut pesan via WhatsApp ↗</button><div class="notice" id="waNotice">Nomor WhatsApp warung: 089658739582. Pesanan akan dibuka di WhatsApp dengan rincian belanja.</div></div></aside></div>
 <button class="floating-cart" id="floatingCart" aria-label="Buka keranjang belanja">🛒 Keranjang <span class="cart-count" id="floatingCartCount">0</span></button>
+<!-- Tombol kembali ke atas -->
+<button
+    class="back-to-top"
+    id="backToTop"
+    type="button"
+    aria-label="Kembali ke atas"
+    title="Kembali ke atas"
+>
+    ↑
+</button>
 <div class="toast" id="toast" role="status"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -225,10 +333,12 @@ const sampleProducts = [
  {id:6,name:'Biskuit',category:'Makanan',price:7000,unit:'bungkus',emoji:'🍪',color:'#f8e7bd',stock:18},
  {id:7,name:'Air Mineral 600 ml',category:'Minuman',price:3500,unit:'botol',emoji:'💧',color:'#dceeff',stock:24},
  {id:8,name:'Susu UHT',category:'Minuman',price:6000,unit:'kotak',emoji:'🥛',color:'#e8e5ff',stock:16},
- {id:9,name:'Sabun Mandi',category:'Rumah tangga',price:4000,unit:'batang',emoji:'🧼',color:'#dff6ef',stock:14},
- {id:10,name:'Deterjen Sachet',category:'Rumah tangga',price:2000,unit:'sachet',emoji:'🫧',color:'#e3edff',stock:30},
+ {id:9,name:'Sabun Mandi',category:'Kebutuhan rumah',price:4000,unit:'batang',emoji:'🧼',color:'#dff6ef',stock:14},
+ {id:10,name:'Deterjen Sachet',category:'Kebutuhan rumah',price:2000,unit:'sachet',emoji:'🫧',color:'#e3edff',stock:30},
  {id:11,name:'Kopi Sachet',category:'Minuman',price:1500,unit:'sachet',emoji:'☕',color:'#f1e2d6',stock:40},
- {id:12,name:'Tepung Terigu 1 kg',category:'Sembako',price:12000,unit:'kg',emoji:'🌾',color:'#f4edda',stock:12}
+ {id:12,name:'Tepung Terigu 1 kg',category:'Sembako',price:12000,unit:'kg',emoji:'🌾',color:'#f4edda',stock:12},
+{id:13,name:'Plester Luka',category:'Obat-obatan',price:5000,unit:'kotak',emoji:'🩹',color:'#fbe4d7',stock:10},
+{id:14,name:'Minyak Kayu Putih',category:'Obat-obatan',price:12000,unit:'botol',emoji:'🧴',color:'#dff6ef',stock:8},
 ];
 let products = [...sampleProducts];
 
@@ -391,17 +501,96 @@ async function loadProducts() {
 }
 
 function cartTotals(){let qty=0,total=0;Object.entries(cart).forEach(([id,q])=>{const p=products.find(x=>x.id===Number(id));if(p){qty+=q;total+=p.price*q}});return{qty,total}}
-function renderCart(){const root=document.getElementById('cartItems');const entries=Object.entries(cart).filter(([id,q])=>q>0);const {qty,total}=cartTotals();document.getElementById('cartCount').textContent=qty;document.getElementById('floatingCartCount').textContent=qty;document.getElementById('totals').hidden=!entries.length;if(!entries.length){root.innerHTML='<div class="cart-empty"><div style="font-size:46px">🛒</div><p>Keranjang masih kosong.</p><p>Yuk, pilih barang yang kamu butuhkan!</p></div>';return}root.innerHTML=entries.map(([id,q])=>{const p=products.find(x=>x.id===Number(id));return `<div class="cart-item"><div><strong>${p.name}</strong><small>${rupiah(p.price)} × ${q} = ${rupiah(p.price*q)}</small></div><div class="qty"><button data-change="${id}" data-delta="-1" aria-label="Kurangi">−</button><strong>${q}</strong><button data-change="${id}" data-delta="1" aria-label="Tambah">+</button></div></div>`}).join('');document.getElementById('totalQty').textContent=qty+' barang';document.getElementById('totalPrice').textContent=rupiah(total);document.getElementById('checkout').disabled=!WHATSAPP_NUMBER;document.getElementById('waNotice').textContent=WHATSAPP_NUMBER?'Pesanan akan dibuka di WhatsApp. Periksa kembali sebelum mengirim.':'Nomor WhatsApp warung belum diatur. Tombol pemesanan aktif setelah nomor ditambahkan.'}
+function renderCart() {
+    const root = document.getElementById('cartItems');
+    const entries = Object.entries(cart).filter(([id, q]) => q > 0);
+    const { qty, total } = cartTotals();
+
+    // Perbarui jumlah barang pada tombol keranjang
+    document.getElementById('floatingCartCount').textContent = qty;
+
+    // Tampilkan total belanja jika keranjang tidak kosong
+    document.getElementById('totals').hidden = !entries.length;
+
+    // Tampilan saat keranjang masih kosong
+    if (!entries.length) {
+        root.innerHTML = `
+            <div class="cart-empty">
+                <div style="font-size:46px">🛒</div>
+                <p>Keranjang masih kosong.</p>
+                <p>Yuk, pilih barang yang kamu butuhkan!</p>
+            </div>
+        `;
+        return;
+    }
+
+    // Tampilan barang di dalam keranjang
+    root.innerHTML = entries.map(([id, q]) => {
+        const p = products.find(x => x.id === Number(id));
+
+        return `
+            <div class="cart-item">
+                <div>
+                    <strong>${p.name}</strong>
+                    <small>
+                        ${rupiah(p.price)} × ${q} = ${rupiah(p.price * q)}
+                    </small>
+                </div>
+
+                <div class="qty">
+                    <button data-change="${id}" data-delta="-1"
+                        aria-label="Kurangi">−</button>
+
+                    <strong>${q}</strong>
+
+                    <button data-change="${id}" data-delta="1"
+                        aria-label="Tambah">+</button>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    // Perbarui total belanja
+    document.getElementById('totalQty').textContent = qty + ' barang';
+    document.getElementById('totalPrice').textContent = rupiah(total);
+
+    document.getElementById('checkout').disabled = !WHATSAPP_NUMBER;
+
+    document.getElementById('waNotice').textContent =
+        WHATSAPP_NUMBER
+            ? 'Pesanan akan dibuka di WhatsApp. Periksa kembali sebelum mengirim.'
+            : 'Nomor WhatsApp warung belum diatur. Tombol pemesanan aktif setelah nomor ditambahkan.';
+}
+
 function openCart(){document.getElementById('overlay').classList.add('open');renderCart()}function closeCart(){document.getElementById('overlay').classList.remove('open')}
 document.getElementById('products').addEventListener('click',e=>{const b=e.target.closest('[data-add]');if(!b)return;const id=Number(b.dataset.add),p=products.find(x=>x.id===id);if((cart[id]||0)>=p.stock){showToast('Jumlah melebihi stok contoh.');return}cart[id]=(cart[id]||0)+1;renderCart();showToast(p.name+' ditambahkan ke keranjang')});
 document.getElementById('cartItems').addEventListener('click',e=>{const b=e.target.closest('[data-change]');if(!b)return;const id=Number(b.dataset.change),delta=Number(b.dataset.delta),p=products.find(x=>x.id===id);cart[id]=Math.max(0,Math.min(p.stock,(cart[id]||0)+delta));if(!cart[id])delete cart[id];renderCart()});
-document.getElementById('categories').addEventListener('click',e=>{const b=e.target.closest('[data-cat]');if(!b)return;activeCategory=b.dataset.cat;document.querySelectorAll('.cat').forEach(x=>x.classList.toggle('active',x===b));renderProducts()});document.getElementById('search').addEventListener('input',renderProducts);document.getElementById('openCart').addEventListener('click',openCart);document.getElementById('floatingCart').addEventListener('click',openCart);document.getElementById('closeCart').addEventListener('click',closeCart);document.getElementById('overlay').addEventListener('click',e=>{if(e.target.id==='overlay')closeCart()});
+document.getElementById('categories').addEventListener('click',e=>{const b=e.target.closest('[data-cat]');if(!b)return;activeCategory=b.dataset.cat;document.querySelectorAll('.cat').forEach(x=>x.classList.toggle('active',x===b));renderProducts()});document.getElementById('search').addEventListener('input',renderProducts);document.getElementById('floatingCart').addEventListener('click',openCart);document.getElementById('closeCart').addEventListener('click',closeCart);document.getElementById('overlay').addEventListener('click',e=>{if(e.target.id==='overlay')closeCart()});
 document.getElementById('checkout').addEventListener('click',()=>{if(!WHATSAPP_NUMBER){showToast('Nomor WhatsApp belum diatur');return}const {total}=cartTotals();const lines=Object.entries(cart).filter(([id,q])=>q>0).map(([id,q],i)=>{const p=products.find(x=>x.id===Number(id));return `${i+1}. ${p.name} — ${q} ${p.unit} = ${rupiah(p.price*q)}`});const msg=`Halo Umi Ranis, saya mau pesan:\n\n${lines.join('\n')}\n\nTotal: ${rupiah(total)}\nMohon konfirmasi pesanan saya. Terima kasih.`;window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank','noopener,noreferrer')});document.getElementById('year').textContent =
   new Date().getFullYear();
 
 renderProducts();
 renderCart();
 loadProducts();
+
+// Tombol kembali ke atas
+const backToTopButton = document.getElementById('backToTop');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 280) {
+        backToTopButton.classList.add('show');
+    } else {
+        backToTopButton.classList.remove('show');
+    }
+}, { passive: true });
+
+backToTopButton.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
 </script>
 
 
