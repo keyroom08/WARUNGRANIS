@@ -6,154 +6,704 @@
 <title>Admin Umi Ranis</title>
 
 <style>
-*{box-sizing:border-box}
-body{
-    margin:0;font-family:Arial,sans-serif;
-    background:#fffaf0;color:#24352b
+* {
+    box-sizing: border-box;
 }
-header{
-    background:#217a4a;color:white;
-    padding:22px;text-align:center
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fffaf0;
+    color: #24352b;
 }
-header h1{margin:0}
-.container{max-width:900px;margin:25px auto;padding:15px}
-.card{
-    background:white;padding:20px;margin-bottom:20px;
-    border-radius:16px;border:1px solid #e5e9df
+
+header {
+    background: #217a4a;
+    color: white;
+    padding: 22px 15px;
+    text-align: center;
 }
-input,select,button{
-    width:100%;padding:12px;margin:6px 0;
-    border-radius:9px;border:1px solid #ddd;font-size:15px
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
 }
-button{
-    background:#217a4a;color:white;border:none;
-    cursor:pointer;font-weight:bold
+
+header p {
+    margin-bottom: 0;
 }
-button:hover{opacity:.9}
-.delete{background:#d94b43}
-.cancel{background:#68776c}
-.logout{background:#42534a}
-.product{
-    border-bottom:1px solid #eee;padding:16px 0;
-    display:flex;gap:15px;align-items:flex-start
+
+.topnote {
+    background: #ffb84d;
+    color: #24352b;
+    padding: 9px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
 }
-.product img{
-    width:95px;height:95px;object-fit:cover;
-    border-radius:12px;background:#e5f5df
+
+.container {
+    max-width: 1200px;
+    margin: 25px auto;
+    padding: 15px;
 }
-.product-info{flex:1;min-width:0}
-.price{color:#217a4a;font-weight:bold}
-label{
-    display:block;font-weight:bold;margin-top:12px;font-size:14px
+
+.card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 22px;
+    border-radius: 16px;
+    border: 1px solid #e5e9df;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.04);
 }
-.hint{font-size:12px;color:#68776c;line-height:1.5}
-#status{
-    padding:12px;border-radius:8px;
-    background:#f2f5ed;white-space:pre-wrap
+
+input,
+select,
+button {
+    font-family: inherit;
+    font-size: 15px;
 }
-.back{
-    display:block;text-align:center;color:#217a4a;
-    margin:20px;text-decoration:none
+
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    margin: 6px 0;
+    border-radius: 9px;
+    border: 1px solid #ddd;
+    background: white;
 }
-@media(max-width:500px){
-    .product img{width:75px;height:75px}
-    .card{padding:14px}
+
+button {
+    padding: 12px 16px;
+    border-radius: 9px;
+    border: none;
+    background: #217a4a;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+button:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.delete {
+    background: #d94b43;
+}
+
+.cancel {
+    background: #68776c;
+}
+
+.logout {
+    background: #42534a;
+    width: 100%;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 12px;
+    font-size: 14px;
+}
+
+.hint {
+    font-size: 12px;
+    color: #68776c;
+    line-height: 1.5;
+}
+
+#status {
+    padding: 12px;
+    border-radius: 8px;
+    background: #f2f5ed;
+    white-space: pre-wrap;
+    line-height: 1.5;
+}
+
+.back {
+    display: block;
+    text-align: center;
+    color: #217a4a;
+    margin: 25px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* TOMBOL KEMBALI KE ATAS */
+
+.back-to-top {
+    position: fixed;
+    right: 20px;
+    bottom: 25px;
+    z-index: 30;
+
+    width: 48px;
+    height: 48px;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: #217a4a;
+    color: white;
+    font-size: 27px;
+    font-weight: bold;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: opacity 0.2s, visibility 0.2s;
+}
+
+/* Tombol muncul setelah halaman digulir */
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Ukuran tombol untuk HP */
+
+@media (max-width: 600px) {
+    .back-to-top {
+        right: 15px;
+        bottom: 20px;
+        width: 44px;
+        height: 44px;
+        font-size: 25px;
+    }
+}
+
+/* JUDUL KATALOG */
+
+.page-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+.page-head h2 {
+    margin: 0;
+}
+
+/* PENCARIAN DAN KATEGORI STICKY */
+
+.catalog-tools {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: #fffaf0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+/* Jarak pencarian dari judul katalog */
+
+.catalog-tools .search-row {
+    margin-top: 8px;
+    margin-bottom: 10px;
+}
+
+/* Kategori tetap rapi di bawah pencarian */
+
+.catalog-tools .category-row {
+    margin-bottom: 8px;
+}
+
+/* PENCARIAN */
+
+.search-row {
+    margin-bottom: 15px;
+}
+
+.search-row input {
+    padding: 14px;
+    border: 1px solid #dce5d9;
+    border-radius: 12px;
+    outline: none;
+}
+
+.search-row input:focus {
+    border-color: #217a4a;
+}
+
+/* FILTER KATEGORI */
+
+.category-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+}
+
+.category-row .cat {
+    width: auto;
+    padding: 10px 15px;
+    border-radius: 20px;
+    background: white;
+    color: #217a4a;
+    border: 1px solid #cbdcca;
+}
+
+.category-row .cat.active {
+    background: #217a4a;
+    color: white;
+    border-color: #217a4a;
+}
+
+/* GRID PRODUK */
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+}
+
+/* KARTU PRODUK */
+
+.product {
+    background: white;
+    border: 1px solid #e5e9df;
+    border-radius: 15px;
+    overflow: hidden;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+    transition: 0.2s;
+}
+
+.product:hover {
+    box-shadow: 0 6px 18px rgba(0,0,0,0.09);
+    transform: translateY(-2px);
+}
+
+/* UKURAN GAMBAR DIBUAT SERAGAM */
+
+.product-art {
+    width: 100%;
+    height: 180px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 12px;
+    background: #e5f5df;
+}
+
+.product-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 8px;
+}
+
+.product-art span {
+    font-size: 65px;
+}
+
+.product small {
+    display: block;
+    color: #68776c;
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.product h3 {
+    font-size: 16px;
+    line-height: 1.4;
+    margin: 0 0 9px;
+    min-height: 44px;
+    overflow-wrap: anywhere;
+}
+
+.price {
+    color: #217a4a;
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.stock {
+    color: #68776c;
+    font-size: 13px;
+    margin-bottom: 14px;
+}
+
+/* TOMBOL EDIT DAN HAPUS */
+
+.product-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.product-actions button {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 5px;
+    font-size: 13px;
+}
+
+.product-actions .edit {
+    background: #ffb84d;
+    color: #24352b;
+}
+
+.product-actions .delete {
+    background: #d94b43;
+}
+
+/* PESAN PRODUK KOSONG */
+
+.empty {
+    grid-column: 1 / -1;
+    background: white;
+    padding: 25px;
+    text-align: center;
+    border-radius: 12px;
+    color: #68776c;
+    border: 1px solid #e5e9df;
+}
+
+/* RESPONSIVE TABLET */
+
+@media (max-width: 900px) {
+    .product-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .product-art {
+        height: 160px;
+    }
+}
+
+/* RESPONSIVE HP */
+
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+        margin: 15px auto;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .product {
+        padding: 9px;
+    }
+
+    .product-art {
+        height: 125px;
+    }
+
+    .product-art span {
+        font-size: 45px;
+    }
+
+    .product h3 {
+        font-size: 14px;
+        min-height: 40px;
+    }
+
+    .price {
+        font-size: 15px;
+    }
+
+    .product-actions {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .product-actions button {
+        width: 100%;
+        padding: 9px 4px;
+    }
+
+    .page-head {
+        align-items: flex-start;
+    }
+
+    .page-head h2 {
+        font-size: 19px;
+    }
+
+    .page-head p {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    .category-row {
+        gap: 6px;
+    }
+
+    .category-row .cat {
+        padding: 9px 11px;
+        font-size: 12px;
+    }
+
+    .card {
+        padding: 14px;
+    }
 }
 </style>
 </head>
 
 <body>
 
+<div class="topnote">
+    🌼 Dashboard Pengelolaan Produk · Warung Umi Ranis 💚
+</div>
+
 <header>
     <h1>🛒 Umi Ranis</h1>
-    <p>Dashboard Pengelolaan Produk</p>
+    <p>Kelola produk dengan mudah</p>
 </header>
 
 <div class="container">
 
+    <!-- STATUS ADMIN -->
+
     <div class="card">
         <h2>🔐 Status Admin</h2>
+
         <p id="status">Memeriksa login...</p>
-        <button type="button" class="logout" id="logoutButton">
+
+        <button
+            type="button"
+            class="logout"
+            id="logoutButton">
             Keluar dari Akun
         </button>
     </div>
 
+    <!-- FORM TAMBAH DAN EDIT PRODUK -->
+
     <div class="card" id="adminPanel" hidden>
+
         <h2 id="formTitle">➕ Tambah Produk</h2>
 
         <form id="productForm">
+
             <label>Nama Produk</label>
-            <input id="name" required maxlength="150"
-                   placeholder="Contoh: Minyak Goreng 1 L">
+            <input
+                id="name"
+                required
+                maxlength="150"
+                placeholder="Contoh: Minyak Goreng 1 L">
 
             <label>Kategori</label>
             <select id="category" required>
                 <option value="Sembako">🌾 Sembako</option>
                 <option value="Makanan">🍜 Makanan</option>
                 <option value="Minuman">🥤 Minuman</option>
-                <option value="Rumah tangga">🧼 Rumah tangga</option>
+                <option value="Kebutuhan rumah">🧼 Kebutuhan rumah</option>
+                <option value="Obat-obatan">💊 Obat-obatan</option>
             </select>
 
             <label>Harga Jual (Rp)</label>
-            <input id="price" type="number" min="1" step="1" required>
+            <input
+                id="price"
+                type="number"
+                min="1"
+                step="1"
+                required
+                placeholder="Contoh: 15000">
 
             <label>Jumlah Stok</label>
-            <input id="stock" type="number" min="0" step="1" required>
+            <input
+                id="stock"
+                type="number"
+                min="0"
+                step="1"
+                required
+                placeholder="Contoh: 20">
 
             <label>Satuan</label>
-            <input id="unit" maxlength="30" placeholder="Contoh: pcs, kg, liter">
+            <input
+                id="unit"
+                maxlength="30"
+                placeholder="Contoh: pcs, kg, liter">
 
             <label>Emoji Produk</label>
-            <input id="emoji" maxlength="20" placeholder="Contoh: 🛍️">
+            <input
+                id="emoji"
+                maxlength="20"
+                placeholder="Contoh: 🛍️">
 
-            <label>Warna Latar</label>
-            <input id="color" type="color" value="#e5f5df">
+            <label>Warna Latar Produk</label>
+            <input
+                id="color"
+                type="color"
+                value="#e5f5df">
 
             <label>URL Foto Produk</label>
-            <input id="photoUrl" type="url"
-                   placeholder="https://contoh.com/foto.jpg">
+            <input
+                id="photoUrl"
+                type="url"
+                placeholder="https://contoh.com/foto.jpg">
 
             <p class="hint">
                 Masukkan URL foto yang bisa diakses melalui browser.
                 Fitur ini menggunakan URL foto, bukan upload langsung.
             </p>
 
-            <img id="preview" alt="Pratinjau foto"
-                 style="display:none;width:120px;height:120px;object-fit:contain">
+            <img
+                id="preview"
+                alt="Pratinjau foto"
+                style="display:none;width:120px;height:120px;object-fit:contain">
 
             <button type="submit" id="saveButton">
                 💾 Simpan Produk
             </button>
 
-            <button type="button" id="cancelButton"
-                    class="cancel" hidden>
+            <button
+                type="button"
+                id="cancelButton"
+                class="cancel"
+                hidden>
                 Batal Edit
             </button>
+
         </form>
     </div>
 
-    <div class="card" id="listPanel" hidden>
-        <h2>📦 Daftar Produk</h2>
-        <button type="button" id="refreshButton">
-            🔄 Muat Ulang Produk
-        </button>
-        <div id="productList">Memuat produk...</div>
+    <!-- KATALOG PRODUK -->
+
+    <section id="listPanel" hidden>
+
+        <div class="page-head">
+
+            <div>
+                <h2>📦 Katalog Produk</h2>
+                <p style="color:#68776c;margin:6px 0 0">
+                    Cari, lihat, dan edit produk warungmu.
+                </p>
+            </div>
+
+            <button
+                type="button"
+                id="refreshButton">
+                🔄 Muat Ulang
+            </button>
+
+        </div>
+
+
+<div class="catalog-tools">
+
+    <!-- PENCARIAN PRODUK -->
+    <div class="search-row">
+        <input
+            id="searchProducts"
+            type="search"
+            placeholder="🔎 Cari nama produk..."
+            aria-label="Cari produk">
     </div>
 
-    <a class="back" href="index.html">← Kembali ke Katalog</a>
+    <!-- FILTER KATEGORI -->
+    <div class="category-row" id="adminCategories">
+
+        <button type="button" class="cat active" data-cat="Semua">
+            Semua
+        </button>
+
+        <button type="button" class="cat" data-cat="Sembako">
+            🌾 Sembako
+        </button>
+
+        <button type="button" class="cat" data-cat="Makanan">
+            🍜 Makanan
+        </button>
+
+        <button type="button" class="cat" data-cat="Minuman">
+            🥤 Minuman
+        </button>
+
+        <button type="button" class="cat" data-cat="Kebutuhan rumah">
+            🧼 Kebutuhan rumah
+        </button>
+
+        <button type="button" class="cat" data-cat="Obat-obatan">
+            💊 Obat-obatan
+        </button>
+
+    </div>
+
 </div>
+
+<!-- DAFTAR PRODUK -->
+
+        <!-- DAFTAR PRODUK -->
+
+        <div id="productList" class="product-grid">
+            Memuat produk...
+        </div>
+
+    </section>
+
+    <a class="back" href="index.html">
+        ← Kembali ke Katalog
+    </a>
+
+<button
+    class="back-to-top"
+    id="backToTop"
+    type="button"
+    aria-label="Kembali ke atas"
+    title="Kembali ke atas">
+    ↑
+</button>
+
+</div>
+
+<!-- SUPABASE -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-const SUPABASE_URL = 'https://clhgnfvmizqasbchgwuz.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_eddkt0LLFQjn3n4OW11E6g_TtefNfON';
+
+// ======================================
+// KONFIGURASI SUPABASE
+// ======================================
+
+const SUPABASE_URL =
+    'https://clhgnfvmizqasbchgwuz.supabase.co';
+
+const SUPABASE_KEY =
+    'sb_publishable_eddkt0LLFQjn3n4OW11E6g_TtefNfON';
 
 const db = window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
+
+
+// ======================================
+// ELEMEN HTML
+// ======================================
 
 const statusBox = document.getElementById('status');
 const adminPanel = document.getElementById('adminPanel');
@@ -165,9 +715,19 @@ let editingId = null;
 let products = [];
 let busy = false;
 
+
+// ======================================
+// PESAN STATUS
+// ======================================
+
 function message(text) {
     statusBox.textContent = text;
 }
+
+
+// ======================================
+// MENCEGAH HTML BERBAHAYA
+// ======================================
 
 function escapeHTML(value) {
     return String(value ?? '').replace(/[&<>"']/g, char => ({
@@ -179,15 +739,24 @@ function escapeHTML(value) {
     })[char]);
 }
 
-// Periksa sesi login dan status admin.
+
+// ======================================
+// MEMERIKSA LOGIN ADMIN
+// ======================================
+
 async function checkAdmin() {
+
     adminPanel.hidden = true;
     listPanel.hidden = true;
 
     const { data, error } = await db.auth.getSession();
 
     if (error || !data.session) {
-        message('Belum login. Silakan kembali ke katalog dan login sebagai admin.');
+
+        message(
+            'Belum login. Silakan kembali ke katalog dan login sebagai admin.'
+        );
+
         return false;
     }
 
@@ -200,25 +769,42 @@ async function checkAdmin() {
         .maybeSingle();
 
     if (adminError) {
-        message('Gagal memeriksa hak admin: ' + adminError.message);
+
+        message(
+            'Gagal memeriksa hak admin: ' + adminError.message
+        );
+
         return false;
     }
 
     if (!admin) {
-        message('Akun ini tidak terdaftar sebagai admin.');
+
+        message(
+            'Akun ini tidak terdaftar sebagai admin.'
+        );
+
         return false;
     }
 
-    message('Login berhasil. Hak akses admin terverifikasi.');
+    message(
+        'Login berhasil. Hak akses admin terverifikasi.'
+    );
+
     adminPanel.hidden = false;
     listPanel.hidden = false;
 
     await loadProducts();
+
     return true;
 }
 
-// Ambil produk dari database Supabase.
+
+// ======================================
+// MEMUAT PRODUK DARI SUPABASE
+// ======================================
+
 async function loadProducts() {
+
     productList.textContent = 'Memuat produk...';
 
     const { data, error } = await db
@@ -227,168 +813,453 @@ async function loadProducts() {
         .order('id', { ascending: true });
 
     if (error) {
-        productList.textContent = 'Gagal memuat produk: ' + error.message;
+
+        productList.textContent =
+            'Gagal memuat produk: ' + error.message;
+
         return;
     }
 
     products = data || [];
+
     renderProducts();
 }
 
+
+// ======================================
+// PENCARIAN DAN FILTER KATEGORI
+// ======================================
+
+let activeCategory = 'Semua';
+
 function renderProducts() {
-    if (!products.length) {
-        productList.textContent = 'Belum ada produk di database.';
+
+    const query = document
+        .getElementById('searchProducts')
+        .value
+        .toLowerCase()
+        .trim();
+
+    const filtered = products.filter(p => {
+
+        const categoryMatch =
+            activeCategory === 'Semua' ||
+            p.category === activeCategory;
+
+        const searchText =
+            String(p.name || '') + ' ' +
+            String(p.category || '');
+
+        const searchMatch =
+            searchText.toLowerCase().includes(query);
+
+        return categoryMatch && searchMatch;
+    });
+
+    if (!filtered.length) {
+
+        productList.innerHTML = `
+            <div class="empty">
+                Tidak ada produk yang cocok.
+                Coba kata pencarian lain, ya.
+            </div>
+        `;
+
         return;
     }
 
-    productList.innerHTML = products.map(p => {
-        const image = p.photo_url || '';
-        const imageHTML = image
-            ? `<img src="${escapeHTML(image)}"
+    productList.innerHTML = filtered.map(p => {
+
+        const art = p.photo_url
+            ? `
+                <img
+                    src="${escapeHTML(p.photo_url)}"
                     alt="${escapeHTML(p.name)}"
-                    onerror="this.style.display='none'">`
-            : `<div style="width:95px;height:95px;border-radius:12px;
-                         background:${escapeHTML(p.color || '#e5f5df')};
-                         display:grid;place-items:center;font-size:32px">
+                    onerror="this.style.display='none'">
+              `
+            : `
+                <span>
                     ${escapeHTML(p.emoji || '🛍️')}
-               </div>`;
+                </span>
+              `;
 
         return `
-        <div class="product">
-            ${imageHTML}
-            <div class="product-info">
-                <strong>${escapeHTML(p.name)}</strong>
-                <p>${escapeHTML(p.category)}</p>
-                <p class="price">Rp${Number(p.price).toLocaleString('id-ID')}</p>
-                <p>Stok: ${Number(p.stock)} ${escapeHTML(p.unit || '')}</p>
-                <button type="button" data-edit="${escapeHTML(p.id)}">✏️ Edit</button>
-                <button type="button" class="delete"
-                        data-delete="${escapeHTML(p.id)}">🗑️ Hapus</button>
-            </div>
-        </div>`;
+            <article class="product">
+
+                <div
+                    class="product-art"
+                    style="background:${escapeHTML(p.color || '#e5f5df')}">
+
+                    ${art}
+
+                </div>
+
+                <small>
+                    ${escapeHTML(p.category || 'Lainnya')}
+                </small>
+
+                <h3>
+                    ${escapeHTML(p.name)}
+                </h3>
+
+                <div class="price">
+                    Rp${Number(p.price).toLocaleString('id-ID')}
+                </div>
+
+                <div class="stock">
+                    Stok: ${Number(p.stock)}
+                    ${escapeHTML(p.unit || '')}
+                </div>
+
+                <div class="product-actions">
+
+                    <button
+                        type="button"
+                        class="edit"
+                        data-edit="${escapeHTML(p.id)}">
+                        ✏️ Edit
+                    </button>
+
+                    <button
+                        type="button"
+                        class="delete"
+                        data-delete="${escapeHTML(p.id)}">
+                        🗑️ Hapus
+                    </button>
+
+                </div>
+
+            </article>
+        `;
+
     }).join('');
 }
 
+
+// ======================================
+// EVENT PENCARIAN
+// ======================================
+
+document
+    .getElementById('searchProducts')
+    .addEventListener('input', renderProducts);
+
+
+// ======================================
+// EVENT FILTER KATEGORI
+// ======================================
+
+document
+    .getElementById('adminCategories')
+    .addEventListener('click', event => {
+
+        const button = event.target.closest('[data-cat]');
+
+        if (!button) return;
+
+        activeCategory = button.dataset.cat;
+
+        document
+            .querySelectorAll('#adminCategories .cat')
+            .forEach(item => {
+
+                item.classList.toggle(
+                    'active',
+                    item === button
+                );
+
+            });
+
+        renderProducts();
+
+    });
+
+
+// ======================================
+// MENGOSONGKAN FORM
+// ======================================
+
 function resetForm() {
+
     form.reset();
+
     editingId = null;
 
-    document.getElementById('color').value = '#e5f5df';
-    document.getElementById('formTitle').textContent = '➕ Tambah Produk';
-    document.getElementById('saveButton').textContent = '💾 Simpan Produk';
-    document.getElementById('cancelButton').hidden = true;
-    document.getElementById('preview').style.display = 'none';
+    document.getElementById('color').value =
+        '#e5f5df';
+
+    document.getElementById('formTitle').textContent =
+        '➕ Tambah Produk';
+
+    document.getElementById('saveButton').textContent =
+        '💾 Simpan Produk';
+
+    document.getElementById('cancelButton').hidden =
+        true;
+
+    document.getElementById('preview').style.display =
+        'none';
+
     document.getElementById('preview').removeAttribute('src');
+
 }
 
-document.getElementById('photoUrl').addEventListener('input', () => {
-    const url = document.getElementById('photoUrl').value.trim();
-    const preview = document.getElementById('preview');
 
-    if (!url) {
-        preview.style.display = 'none';
-        return;
-    }
+// ======================================
+// PRATINJAU FOTO
+// ======================================
 
-    try {
-        const parsed = new URL(url);
+document
+    .getElementById('photoUrl')
+    .addEventListener('input', () => {
 
-        if (!['http:', 'https:'].includes(parsed.protocol)) {
+        const url = document
+            .getElementById('photoUrl')
+            .value
+            .trim();
+
+        const preview =
+            document.getElementById('preview');
+
+        if (!url) {
+
             preview.style.display = 'none';
+
             return;
         }
 
-        preview.src = url;
-        preview.style.display = 'block';
-    } catch {
-        preview.style.display = 'none';
-    }
-});
+        try {
 
-// Tambah atau edit produk di Supabase.
+            const parsed = new URL(url);
+
+            if (
+                !['http:', 'https:'].includes(parsed.protocol)
+            ) {
+
+                preview.style.display = 'none';
+
+                return;
+            }
+
+            preview.src = url;
+            preview.style.display = 'block';
+
+        } catch {
+
+            preview.style.display = 'none';
+
+        }
+
+    });
+
+
+// ======================================
+// TAMBAH DAN EDIT PRODUK
+// ======================================
+
 form.addEventListener('submit', async event => {
+
     event.preventDefault();
 
     if (busy) return;
+
     busy = true;
 
-    const button = document.getElementById('saveButton');
+    const button =
+        document.getElementById('saveButton');
+
     button.disabled = true;
 
     try {
-        const name = document.getElementById('name').value.trim();
-        const category = document.getElementById('category').value;
-        const price = Number(document.getElementById('price').value);
-        const stock = Number(document.getElementById('stock').value);
-        const unit = document.getElementById('unit').value.trim();
-        const emoji = document.getElementById('emoji').value.trim() || '🛍️';
-        const color = document.getElementById('color').value;
-        const photo_url = document.getElementById('photoUrl').value.trim();
 
-        if (!name || !Number.isFinite(price) || price <= 0 ||
-            !Number.isInteger(stock) || stock < 0) {
-            alert('Periksa kembali nama, harga, dan stok.');
+        const name =
+            document.getElementById('name').value.trim();
+
+        const category =
+            document.getElementById('category').value;
+
+        const price =
+            Number(document.getElementById('price').value);
+
+        const stock =
+            Number(document.getElementById('stock').value);
+
+        const unit =
+            document.getElementById('unit').value.trim();
+
+        const emoji =
+            document.getElementById('emoji').value.trim() || '🛍️';
+
+        const color =
+            document.getElementById('color').value;
+
+        const photo_url =
+            document.getElementById('photoUrl').value.trim();
+
+
+        // Validasi data
+
+        if (
+            !name ||
+            !Number.isFinite(price) ||
+            price <= 0 ||
+            !Number.isInteger(stock) ||
+            stock < 0
+        ) {
+
+            alert(
+                'Periksa kembali nama, harga, dan stok.'
+            );
+
             return;
         }
 
+
+        // Validasi URL foto
+
         if (photo_url) {
-            const parsed = new URL(photo_url);
-            if (!['http:', 'https:'].includes(parsed.protocol)) {
-                alert('URL foto harus menggunakan HTTP atau HTTPS.');
+
+            let parsed;
+
+            try {
+
+                parsed = new URL(photo_url);
+
+            } catch {
+
+                alert('URL foto tidak valid.');
+
+                return;
+            }
+
+            if (
+                !['http:', 'https:'].includes(parsed.protocol)
+            ) {
+
+                alert(
+                    'URL foto harus menggunakan HTTP atau HTTPS.'
+                );
+
                 return;
             }
         }
 
+
+        // Data yang disimpan
+
         const payload = {
-            name, category, price, stock, unit, emoji, color, photo_url
+            name,
+            category,
+            price,
+            stock,
+            unit,
+            emoji,
+            color,
+            photo_url
         };
 
         let result;
 
+
+        // Jika sedang edit
+
         if (editingId !== null) {
+
             result = await db
                 .from('Produk')
                 .update(payload)
                 .eq('id', editingId)
                 .select();
+
         } else {
+
+            // Jika menambah produk baru
+
             result = await db
                 .from('Produk')
                 .insert(payload)
                 .select();
+
         }
+
+
+        // Jika gagal menyimpan
 
         if (result.error) {
-            alert('Gagal menyimpan produk:\n' + result.error.message);
+
+            alert(
+                'Gagal menyimpan produk:\n' +
+                result.error.message
+            );
+
             return;
         }
 
-        if (!result.data || result.data.length === 0) {
-            alert('Tidak ada perubahan yang dikonfirmasi database. Periksa izin tabel Produk.');
+
+        // Periksa hasil penyimpanan
+
+        if (
+            !result.data ||
+            result.data.length === 0
+        ) {
+
+            alert(
+                'Tidak ada perubahan yang dikonfirmasi database. ' +
+                'Periksa izin tabel Produk.'
+            );
+
             return;
         }
 
-        alert(editingId !== null
-            ? 'Produk berhasil diperbarui!'
-            : 'Produk berhasil ditambahkan!');
+
+        // Pesan berhasil
+
+        alert(
+            editingId !== null
+                ? 'Produk berhasil diperbarui!'
+                : 'Produk berhasil ditambahkan!'
+        );
 
         resetForm();
+
         await loadProducts();
 
     } catch (error) {
-        alert('Terjadi kesalahan: ' + error.message);
+
+        alert(
+            'Terjadi kesalahan: ' + error.message
+        );
+
     } finally {
+
         busy = false;
+
         button.disabled = false;
+
     }
+
 });
 
-// Tombol edit dan hapus.
+
+// ======================================
+// TOMBOL EDIT DAN HAPUS
+// ======================================
+
 productList.addEventListener('click', async event => {
-    const editButton = event.target.closest('[data-edit]');
-    const deleteButton = event.target.closest('[data-delete]');
+
+    const editButton =
+        event.target.closest('[data-edit]');
+
+    const deleteButton =
+        event.target.closest('[data-delete]');
+
+
+    // ==================================
+    // EDIT PRODUK
+    // ==================================
 
     if (editButton) {
+
         const p = products.find(item =>
             String(item.id) === editButton.dataset.edit
         );
@@ -397,61 +1268,176 @@ productList.addEventListener('click', async event => {
 
         editingId = p.id;
 
-        document.getElementById('name').value = p.name || '';
-        document.getElementById('category').value = p.category || 'Sembako';
-        document.getElementById('price').value = p.price ?? '';
-        document.getElementById('stock').value = p.stock ?? 0;
-        document.getElementById('unit').value = p.unit || '';
-        document.getElementById('emoji').value = p.emoji || '';
-        document.getElementById('color').value = p.color || '#e5f5df';
-        document.getElementById('photoUrl').value = p.photo_url || '';
+        document.getElementById('name').value =
+            p.name || '';
 
-        document.getElementById('formTitle').textContent = '✏️ Edit Produk';
-        document.getElementById('saveButton').textContent = '💾 Simpan Perubahan';
-        document.getElementById('cancelButton').hidden = false;
+        document.getElementById('category').value =
+            p.category || 'Sembako';
 
-        document.getElementById('photoUrl').dispatchEvent(new Event('input'));
-        form.scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('price').value =
+            p.price ?? '';
+
+        document.getElementById('stock').value =
+            p.stock ?? 0;
+
+        document.getElementById('unit').value =
+            p.unit || '';
+
+        document.getElementById('emoji').value =
+            p.emoji || '';
+
+        document.getElementById('color').value =
+            p.color || '#e5f5df';
+
+        document.getElementById('photoUrl').value =
+            p.photo_url || '';
+
+
+        // Ubah judul dan tombol form
+
+        document.getElementById('formTitle').textContent =
+            '✏️ Edit Produk';
+
+        document.getElementById('saveButton').textContent =
+            '💾 Simpan Perubahan';
+
+        document.getElementById('cancelButton').hidden =
+            false;
+
+
+        // Tampilkan pratinjau foto
+
+        document
+            .getElementById('photoUrl')
+            .dispatchEvent(new Event('input'));
+
+
+        // Arahkan layar ke form
+
+        form.scrollIntoView({
+            behavior: 'smooth'
+        });
+
         return;
     }
 
-    if (deleteButton) {
-        const id = deleteButton.dataset.delete;
-        const p = products.find(item => String(item.id) === id);
 
-        if (!p || !confirm(`Yakin ingin menghapus "${p.name}"?`)) return;
+    // ==================================
+    // HAPUS PRODUK
+    // ==================================
+
+    if (deleteButton) {
+
+        const id = deleteButton.dataset.delete;
+
+        const p = products.find(item =>
+            String(item.id) === id
+        );
+
+        if (!p) return;
+
+        const confirmed = confirm(
+            `Yakin ingin menghapus "${p.name}"?`
+        );
+
+        if (!confirmed) return;
+
 
         const { error } = await db
             .from('Produk')
             .delete()
-            .eq('id', p.id)
-            .select();
+            .eq('id', p.id);
+
 
         if (error) {
-            alert('Gagal menghapus produk:\n' + error.message);
+
+            alert(
+                'Gagal menghapus produk:\n' +
+                error.message
+            );
+
             return;
         }
 
-        alert('Permintaan hapus selesai. Muat ulang daftar untuk memeriksa hasilnya.');
+
+        alert('Produk berhasil dihapus.');
+
         await loadProducts();
-    }
-});
 
-document.getElementById('cancelButton').addEventListener('click', resetForm);
-document.getElementById('refreshButton').addEventListener('click', loadProducts);
-
-document.getElementById('logoutButton').addEventListener('click', async () => {
-    const { error } = await db.auth.signOut();
-
-    if (error) {
-        alert('Gagal keluar: ' + error.message);
-        return;
     }
 
-    window.location.href = 'index.html';
 });
+
+
+// ======================================
+// BATAL EDIT
+// ======================================
+
+document
+    .getElementById('cancelButton')
+    .addEventListener('click', resetForm);
+
+
+// ======================================
+// MUAT ULANG PRODUK
+// ======================================
+
+document
+    .getElementById('refreshButton')
+    .addEventListener('click', loadProducts);
+
+
+// ======================================
+// LOGOUT ADMIN
+// ======================================
+
+document
+    .getElementById('logoutButton')
+    .addEventListener('click', async () => {
+
+        const { error } = await db.auth.signOut();
+
+        if (error) {
+
+            alert(
+                'Gagal keluar: ' + error.message
+            );
+
+            return;
+        }
+
+        window.location.href = 'index.html';
+
+    });
+
+// ======================================
+// TOMBOL KEMBALI KE ATAS
+// ======================================
+
+const backToTopButton = document.getElementById('backToTop');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 280) {
+        backToTopButton.classList.add('show');
+    } else {
+        backToTopButton.classList.remove('show');
+    }
+}, { passive: true });
+
+backToTopButton.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+
+// ======================================
+// JALANKAN PEMERIKSAAN ADMIN
+// ======================================
 
 checkAdmin();
+
 </script>
 
 </body>
