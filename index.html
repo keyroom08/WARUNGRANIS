@@ -4,7 +4,16 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Umi Ranis — Katalog Warung</title>
 <style>
-:root{--green:#217a4a;--green2:#dff5df;--orange:#ffb84d;--pink:#ffdfd7;--cream:#fffaf0;--ink:#24352b;--muted:#68776c;--line:#e5e9df;--white:#fff;--shadow:0 12px 30px #244b3010}*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}button,input{font:inherit}button{cursor:pointer}.topnote{background:#205d3d;color:#fff;text-align:center;padding:8px 12px;font-size:12px}.wrap{max-width:1180px;margin:auto;padding:0 22px}.header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0}.brand{display:flex;align-items:center;gap:12px}.logo{width:52px;height:52px;border-radius:18px;background:var(--orange);display:grid;place-items:center;font-size:27px;box-shadow:4px 4px 0 #f5d28e}.brand h1{font-size:23px;line-height:1;margin:0;font-weight:900;letter-spacing:-.7px}.brand p{margin:5px 0 0;color:var(--muted);font-size:12px}.cart-button{border:0;background:var(--green);color:white;padding:12px 16px;border-radius:14px;font-weight:800;box-shadow:var(--shadow)}.floating-cart{position:fixed;right:20px;bottom:20px;z-index:9;border:0;background:var(--green);color:#fff;padding:14px 18px;border-radius:999px;font-weight:850;box-shadow:0 10px 28px #14241940;display:flex;align-items:center;gap:7px}.floating-cart .cart-count{margin-left:2px}.cart-count{display:inline-grid;place-items:center;background:#fff;color:var(--green);border-radius:50%;min-width:22px;height:22px;margin-left:6px;font-size:12px}
+:root{--green:#217a4a;--green2:#dff5df;--orange:#ffb84d;--pink:#ffdfd7;--cream:#fffaf0;--ink:#24352b;--muted:#68776c;--line:#e5e9df;--white:#fff;--shadow:0 12px 30px #244b3010}*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}button,input{font:inherit}button{cursor:pointer}
+.topnote {
+    background: #205d3d;
+    color: #fff;
+    text-align: center;
+    padding: 3px 8px;
+    font-size: 10px;
+    line-height: 1.2;
+}
+.wrap{max-width:1180px;margin:auto;padding:0 22px}.header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0}.brand{display:flex;align-items:center;gap:12px}.logo{width:52px;height:52px;border-radius:18px;background:var(--orange);display:grid;place-items:center;font-size:27px;box-shadow:4px 4px 0 #f5d28e}.brand h1{font-size:23px;line-height:1;margin:0;font-weight:900;letter-spacing:-.7px}.brand p{margin:5px 0 0;color:var(--muted);font-size:12px}.cart-button{border:0;background:var(--green);color:white;padding:12px 16px;border-radius:14px;font-weight:800;box-shadow:var(--shadow)}.floating-cart{position:fixed;right:20px;bottom:20px;z-index:9;border:0;background:var(--green);color:#fff;padding:14px 18px;border-radius:999px;font-weight:850;box-shadow:0 10px 28px #14241940;display:flex;align-items:center;gap:7px}.floating-cart .cart-count{margin-left:2px}.cart-count{display:inline-grid;place-items:center;background:#fff;color:var(--green);border-radius:50%;min-width:22px;height:22px;margin-left:6px;font-size:12px}
 
 .hero {
     background: linear-gradient(120deg, #e2f6df, #fff0ce 70%, #ffe0d8);
@@ -259,12 +268,12 @@
         <button class="cat" data-cat="Minuman">🥤 Minuman</button>
         <button class="cat" data-cat="Kebutuhan rumah">🧼 Kebutuhan rumah</button>
         <button class="cat" data-cat="Obat-obatan">💊 Obat-obatan</button>
+        <button class="cat" data-cat="Rokok">🚬 Rokok</button>
     </div>
 
 </div>
 
 
-<div class="section-head"><div><h3>Belanja kebutuhanmu 💛</h3><p>Pilih barang untuk memasukkannya ke keranjang.</p></div></div>
 <section class="product-grid" id="products" aria-live="polite"></section>
 <div class="info-strip"><div class="info"><div class="info-icon">🏡</div><div><strong>Warung dekat rumah</strong><span>Kebutuhan sehari-hari tersedia di satu tempat.</span></div></div><div class="info"><div class="info-icon">🧾</div><div><strong>Total belanja transparan</strong><span>Periksa jumlah dan total sebelum mengirim pesanan.</span></div></div><div class="info"><div class="info-icon">💬</div><div><strong>Pesan lewat WhatsApp</strong><span>Pesanan dikirim setelah kamu menekan tombol konfirmasi.</span></div></div></div>
 
