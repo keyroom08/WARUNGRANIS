@@ -4,7 +4,40 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Umi Ranis — Katalog Warung</title>
 <style>
-:root{--green:#217a4a;--green2:#dff5df;--orange:#ffb84d;--pink:#ffdfd7;--cream:#fffaf0;--ink:#24352b;--muted:#68776c;--line:#e5e9df;--white:#fff;--shadow:0 12px 30px #244b3010}*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}button,input{font:inherit}button{cursor:pointer}.topnote{background:#205d3d;color:#fff;text-align:center;padding:8px 12px;font-size:12px}.wrap{max-width:1180px;margin:auto;padding:0 22px}.header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0}.brand{display:flex;align-items:center;gap:12px}.logo{width:52px;height:52px;border-radius:18px;background:var(--orange);display:grid;place-items:center;font-size:27px;box-shadow:4px 4px 0 #f5d28e}.brand h1{font-size:23px;line-height:1;margin:0;font-weight:900;letter-spacing:-.7px}.brand p{margin:5px 0 0;color:var(--muted);font-size:12px}.cart-button{border:0;background:var(--green);color:white;padding:12px 16px;border-radius:14px;font-weight:800;box-shadow:var(--shadow)}.floating-cart{position:fixed;right:20px;bottom:20px;z-index:9;border:0;background:var(--green);color:#fff;padding:14px 18px;border-radius:999px;font-weight:850;box-shadow:0 10px 28px #14241940;display:flex;align-items:center;gap:7px}.floating-cart .cart-count{margin-left:2px}.cart-count{display:inline-grid;place-items:center;background:#fff;color:var(--green);border-radius:50%;min-width:22px;height:22px;margin-left:6px;font-size:12px}.hero{background:linear-gradient(120deg,#e2f6df,#fff0ce 70%,#ffe0d8);border:1px solid #d9ebd2;border-radius:28px;padding:32px;display:grid;grid-template-columns:1.3fr .7fr;align-items:center;gap:18px;overflow:hidden}.eyebrow{color:var(--green);font-size:12px;letter-spacing:1.6px;font-weight:900;text-transform:uppercase}.hero h2{font-size:clamp(30px,4vw,48px);line-height:1.05;letter-spacing:-1.7px;margin:12px 0}.hero p{max-width:560px;color:#526657;line-height:1.7;margin:0 0 20px}.hero-tags{display:flex;gap:8px;flex-wrap:wrap}.pill{display:inline-flex;align-items:center;background:#fff9;border:1px solid #dce8d5;border-radius:999px;padding:7px 11px;font-size:12px;font-weight:750}.hero-art{font-size:95px;text-align:center;transform:rotate(-5deg);filter:drop-shadow(0 10px 8px #7b8b5420)}.search-row{display:flex;gap:12px;margin:26px 0 16px}
+:root{--green:#217a4a;--green2:#dff5df;--orange:#ffb84d;--pink:#ffdfd7;--cream:#fffaf0;--ink:#24352b;--muted:#68776c;--line:#e5e9df;--white:#fff;--shadow:0 12px 30px #244b3010}*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}button,input{font:inherit}button{cursor:pointer}.topnote{background:#205d3d;color:#fff;text-align:center;padding:8px 12px;font-size:12px}.wrap{max-width:1180px;margin:auto;padding:0 22px}.header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0}.brand{display:flex;align-items:center;gap:12px}.logo{width:52px;height:52px;border-radius:18px;background:var(--orange);display:grid;place-items:center;font-size:27px;box-shadow:4px 4px 0 #f5d28e}.brand h1{font-size:23px;line-height:1;margin:0;font-weight:900;letter-spacing:-.7px}.brand p{margin:5px 0 0;color:var(--muted);font-size:12px}.cart-button{border:0;background:var(--green);color:white;padding:12px 16px;border-radius:14px;font-weight:800;box-shadow:var(--shadow)}.floating-cart{position:fixed;right:20px;bottom:20px;z-index:9;border:0;background:var(--green);color:#fff;padding:14px 18px;border-radius:999px;font-weight:850;box-shadow:0 10px 28px #14241940;display:flex;align-items:center;gap:7px}.floating-cart .cart-count{margin-left:2px}.cart-count{display:inline-grid;place-items:center;background:#fff;color:var(--green);border-radius:50%;min-width:22px;height:22px;margin-left:6px;font-size:12px}
+
+.hero {
+    background: linear-gradient(120deg, #e2f6df, #fff0ce 70%, #ffe0d8);
+    border: 1px solid #d9ebd2;
+    border-radius: 20px;
+    padding: 12px 24px;
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    align-items: center;
+    gap: 10px;
+    overflow: hidden;
+    min-height: 0;
+}
+
+.hero h2 {
+    font-size: 36px;
+    line-height: 1.02;
+    letter-spacing: -1px;
+    margin: 7px 0;
+}
+
+.hero p,
+.hero-tags {
+    display: none;
+}
+
+.hero-art {
+    font-size: 55px;
+    text-align: center;
+    transform: rotate(-5deg);
+}
+
+.eyebrow{color:var(--green);font-size:12px;letter-spacing:1.6px;font-weight:900;text-transform:uppercase}.hero h2{font-size:clamp(30px,4vw,48px);line-height:1.05;letter-spacing:-1.7px;margin:12px 0}.hero p{max-width:560px;color:#526657;line-height:1.7;margin:0 0 20px}.hero-tags{display:flex;gap:8px;flex-wrap:wrap}.pill{display:inline-flex;align-items:center;background:#fff9;border:1px solid #dce8d5;border-radius:999px;padding:7px 11px;font-size:12px;font-weight:750}.hero-art{font-size:95px;text-align:center;transform:rotate(-5deg);filter:drop-shadow(0 10px 8px #7b8b5420)}.search-row{display:flex;gap:12px;margin:26px 0 16px}
 
 /* Pencarian dan kategori tetap terlihat saat halaman di-scroll */
 .catalog-tools {
@@ -55,7 +88,12 @@
 }
 
 .product h4{font-size:15px;margin:5px 0 8px;line-height:1.3}.price-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto}.price{font-size:17px;font-weight:900;color:var(--green)}.unit{font-size:11px;color:var(--muted)}.add{border:0;border-radius:11px;background:var(--orange);color:#46300b;font-weight:900;width:38px;height:38px;font-size:22px}.add:hover{filter:brightness(.97)}.stock{font-size:11px;color:#6b7c6d;margin-top:8px}.empty{grid-column:1/-1;text-align:center;background:white;border:1px dashed var(--line);padding:40px;border-radius:18px;color:var(--muted)}.info-strip{margin:28px 0;background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.info{display:flex;gap:10px;align-items:start}.info-icon{font-size:24px}.info strong{display:block;font-size:13px}.info span{display:block;font-size:12px;color:var(--muted);line-height:1.5;margin-top:4px}.footer{padding:20px 0 32px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:12px}.overlay{position:fixed;inset:0;background:#14241980;z-index:10;display:none;justify-content:flex-end}.overlay.open{display:flex}.drawer{width:min(440px,100%);height:100%;background:var(--cream);padding:22px;overflow:auto;box-shadow:-12px 0 35px #0002}.drawer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.drawer-head h3{margin:0;font-size:22px}.close{border:1px solid var(--line);background:white;border-radius:10px;width:38px;height:38px;font-size:21px}.cart-empty{text-align:center;padding:34px 8px;color:var(--muted)}.cart-item{display:grid;grid-template-columns:1fr auto;gap:10px;padding:13px 0;border-bottom:1px solid var(--line)}.cart-item strong{font-size:14px}.cart-item small{display:block;color:var(--muted);margin-top:4px}.qty{display:flex;align-items:center;gap:9px}.qty button{border:1px solid var(--line);background:white;border-radius:8px;width:29px;height:29px;font-weight:900}.totals{border-top:2px dashed #d9dfd4;margin-top:18px;padding-top:16px}.total-line{display:flex;justify-content:space-between;margin:8px 0;color:var(--muted);font-size:14px}.total-line.final{color:var(--ink);font-size:19px;font-weight:900}.checkout{width:100%;border:0;border-radius:13px;padding:14px;background:var(--green);color:white;font-weight:850;margin-top:14px}.checkout:disabled{opacity:.55;cursor:not-allowed}.notice{background:#fff1cf;color:#775313;border:1px solid #f2d997;border-radius:12px;padding:11px;font-size:12px;line-height:1.5;margin-top:12px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1e5337;color:#fff;padding:12px 16px;border-radius:12px;box-shadow:var(--shadow);display:none;z-index:20;font-size:13px}.toast.show{display:block}.admin-note{font-size:12px;color:var(--muted);background:#f0f5eb;padding:12px;border-radius:12px;margin:18px 0 0}
-@media(max-width:900px){.product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{padding:26px}.hero-art{font-size:76px}}@media(max-width:650px){.wrap{padding:0 14px}.header{padding:16px 0}.brand h1{font-size:20px}.logo{width:46px;height:46px}.hero{grid-template-columns:1fr;padding:23px;border-radius:22px}.hero-art{display:none}.hero h2{font-size:35px}.search-row{margin-top:20px}.catalog-tools .search-row {
+@media(max-width:900px){.product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{padding:26px}.hero-art{font-size:76px}}@media(max-width:650px){.wrap{padding:0 14px}.header{padding:16px 0}.brand h1{font-size:20px}.logo{width:46px;height:46px}.hero {
+    grid-template-columns: 1fr;
+    padding: 20px;
+    min-height: 0;
+    border-radius: 20px;
+}.hero-art{display:none}.hero h2{font-size:35px}.search-row{margin-top:20px}.catalog-tools .search-row {
     margin-top: 20px;}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.product{padding:10px;border-radius:16px}.product-art{height:95px;font-size:44px}.product h4{font-size:13px}.price{font-size:15px}.info-strip{grid-template-columns:1fr;gap:14px}.section-head h3{font-size:19px}.footer{flex-direction:column}.cart-button{padding:10px 12px;font-size:12px}.floating-cart{right:12px;bottom:12px;padding:12px 15px}}
 
 /* Nama produk */
@@ -148,6 +186,33 @@
     }
 }
 
+/* Tampilan desktop lebih ringkas */
+@media (min-width: 901px) {
+    .header {
+        padding: 12px 0;
+    }
+
+    .logo {
+        width: 46px;
+        height: 46px;
+    }
+
+    .hero h2 {
+        font-size: 34px;
+    }
+
+    .product-art {
+        height: 85px;
+    }
+
+    .product {
+        padding: 10px;
+    }
+
+    .product-grid {
+        gap: 12px;
+    }
+}
 
 </style>
 </head>
@@ -177,14 +242,7 @@
     </div>
 </header>
 
-<section class="hero"><div><div class="eyebrow">Selamat datang di warung kami</div><h2>Belanja harian,<br>jadi lebih gampang!</h2><p>Cari sembako, camilan, minuman, dan kebutuhan rumah tanpa harus bingung. Pilih barang, cek total belanja, lalu kirim pesanan ke Umi Ranis.</p>
-
-<div class="hero-tags">
-    <span class="pill">🌾 Sembako</span>
-    <span class="pill">🍜 Makanan & minuman</span>
-    <span class="pill">🧼 Kebutuhan rumah</span>
-    <span class="pill">💊 Obat-obatan</span>
-</div>
+<section class="hero"><div><div class="eyebrow">Selamat datang di warung kami</div><h2>Belanja harian,<br>jadi lebih gampang!</h2>
 
 </div><div class="hero-art" aria-hidden="true">🧺🥚🥛</div></section>
 
