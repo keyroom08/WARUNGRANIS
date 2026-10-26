@@ -650,18 +650,16 @@ async function loadProducts() {
   }
 }
 function cartTotals(){let qty=0,total=0;Object.entries(cart).forEach(([id,q])=>{const p=products.find(x=>x.id===Number(id));if(p){qty+=q;total+=p.price*q}});return{qty,total}}
+```javascript
 function renderCart() {
     const root = document.getElementById('cartItems');
     const entries = Object.entries(cart).filter(([id, q]) => q > 0);
     const { qty, total } = cartTotals();
 
-    // Perbarui jumlah barang pada tombol keranjang
     document.getElementById('floatingCartCount').textContent = qty;
-
-    // Tampilkan total belanja jika keranjang tidak kosong
     document.getElementById('totals').hidden = !entries.length;
 
-    // Tampilan saat keranjang masih kosong
+    // Jika keranjang kosong
     if (!entries.length) {
         root.innerHTML = `
             <div class="cart-empty">
@@ -670,41 +668,22 @@ function renderCart() {
                 <p>Yuk, pilih barang yang kamu butuhkan!</p>
             </div>
         `;
+
+        document.getElementById('totalQty').textContent = '0 barang';
+        document.getElementById('totalPrice').textContent = rupiah(0);
+
         return;
     }
 
-    // Tampilan barang di dalam keranjang
-```javascript
-root.innerHTML = entries.map(([id, q]) => {
-    const p = products.find(x => x.id === Number(id));
+    // Tampilkan hanya produk yang masih tersedia di katalog
+    const validEntries = entries.filter(([id]) =>
+        products.some(p => p.id === Number(id))
+    );
 
-    // Abaikan produk yang tidak ditemukan
-    if (!p) {
-        return '';
-    }
+    root.innerHTML = validEntries.map(([id, q]) => {
+        const p = products.find(x => x.id === Number(id));
 
-    return `
-        <div class="cart-item">
-            <div>
-                <strong>${p.name}</strong>
-                <small>
-                    ${rupiah(p.price)} × ${q} = ${rupiah(p.price * q)}
-                </small>
-            </div>
-
-            <div class="qty">
-                <button data-change="${id}" data-delta="-1"
-                    aria-label="Kurangi">−</button>
-
-                <strong>${q}</strong>
-
-                <button data-change="${id}" data-delta="1"
-                    aria-label="Tambah">+</button>
-            </div>
-        </div>
-    `;
-}).join('');
-````
+        return `
             <div class="cart-item">
                 <div>
                     <strong>${p.name}</strong>
@@ -726,18 +705,25 @@ root.innerHTML = entries.map(([id, q]) => {
         `;
     }).join('');
 
-    // Perbarui total belanja
-    document.getElementById('totalQty').textContent = qty + ' barang';
-    document.getElementById('totalPrice').textContent = rupiah(total);
+    // Hitung ulang total berdasarkan produk yang tersedia
+    const validQty = validEntries.reduce((sum, [, q]) => sum + q, 0);
 
-    document.getElementById('checkout').disabled = !WHATSAPP_NUMBER;
+    const validTotal = validEntries.reduce((sum, [id, q]) => {
+        const p = products.find(x => x.id === Number(id));
+        return sum + (p ? p.price * q : 0);
+    }, 0);
+
+    document.getElementById('totalQty').textContent = validQty + ' barang';
+    document.getElementById('totalPrice').textContent = rupiah(validTotal);
+
+    document.getElementById('checkout').disabled =
+        !WHATSAPP_NUMBER || validEntries.length === 0;
 
     document.getElementById('waNotice').textContent =
-        WHATSAPP_NUMBER
-            ? 'Pesanan akan dibuka di WhatsApp. Periksa kembali sebelum mengirim.'
-            : 'Nomor WhatsApp warung belum diatur. Tombol pemesanan aktif setelah nomor ditambahkan.';
+        'Pesanan akan dibuka di WhatsApp. Periksa kembali sebelum mengirim.';
 }
-
+```
+	
 function openCart(){document.getElementById('overlay').classList.add('open');renderCart()}function closeCart(){document.getElementById('overlay').classList.remove('open')}
 document.getElementById('products').addEventListener('click',e=>{const b=e.target.closest('[data-add]');if(!b)return;const id=Number(b.dataset.add),p=products.find(x=>x.id===id);if((cart[id]||0)>=p.stock){showToast('Jumlah melebihi stok contoh.');return}cart[id] = (cart[id] || 0) + 1;
 saveCart();
