@@ -674,10 +674,37 @@ function renderCart() {
     }
 
     // Tampilan barang di dalam keranjang
-    root.innerHTML = entries.map(([id, q]) => {
-        const p = products.find(x => x.id === Number(id));
+```javascript
+root.innerHTML = entries.map(([id, q]) => {
+    const p = products.find(x => x.id === Number(id));
 
-        return `
+    // Abaikan produk yang tidak ditemukan
+    if (!p) {
+        return '';
+    }
+
+    return `
+        <div class="cart-item">
+            <div>
+                <strong>${p.name}</strong>
+                <small>
+                    ${rupiah(p.price)} × ${q} = ${rupiah(p.price * q)}
+                </small>
+            </div>
+
+            <div class="qty">
+                <button data-change="${id}" data-delta="-1"
+                    aria-label="Kurangi">−</button>
+
+                <strong>${q}</strong>
+
+                <button data-change="${id}" data-delta="1"
+                    aria-label="Tambah">+</button>
+            </div>
+        </div>
+    `;
+}).join('');
+````
             <div class="cart-item">
                 <div>
                     <strong>${p.name}</strong>
