@@ -683,27 +683,28 @@ function renderCart() {
     root.innerHTML = validEntries.map(([id, q]) => {
         const p = products.find(x => x.id === Number(id));
 
-        return ` 
-            <div class="cart-item">
-                <div>
-                    <strong>${p.name}</strong>
-                    <small>
-                        ${rupiah(p.price)} × ${q} = ${rupiah(p.price * q)}
-                    </small>
-                </div>
+```javascript
+return `
+    <div class="cart-item">
+        <div>
+            <strong>${p.name}</strong>
+            <small>
+                ${rupiah(p.price)} × ${q} = ${rupiah(p.price * q)}
+            </small>
+        </div>
 
-                <div class="qty">
-                    <button data-change="${id}" data-delta="-1"
-                        aria-label="Kurangi">−</button>
+        <div class="qty">
+            <button data-change="${id}" data-delta="-1"
+                aria-label="Kurangi">−</button>
 
-                    <strong>${q}</strong>
+            <strong>${q}</strong>
 
-                    <button data-change="${id}" data-delta="1"
-                        aria-label="Tambah">+</button>
-                </div>
-            </div>
-      `  ;
-    }).join('');
+            <button data-change="${id}" data-delta="1"
+                aria-label="Tambah">+</button>
+        </div>
+    </div>
+`;
+	}).join('');
 
     // Hitung ulang total berdasarkan produk yang tersedia
     const validQty = validEntries.reduce((sum, [, q]) => sum + q, 0);
