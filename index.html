@@ -683,7 +683,7 @@ function renderCart() {
     root.innerHTML = validEntries.map(([id, q]) => {
         const p = products.find(x => x.id === Number(id));
 
-        return 
+        return ` 
             <div class="cart-item">
                 <div>
                     <strong>${p.name}</strong>
@@ -702,7 +702,7 @@ function renderCart() {
                         aria-label="Tambah">+</button>
                 </div>
             </div>
-        ;
+      `  ;
     }).join('');
 
     // Hitung ulang total berdasarkan produk yang tersedia
