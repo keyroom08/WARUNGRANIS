@@ -660,20 +660,21 @@ function renderCart() {
     document.getElementById('totals').hidden = !entries.length;
 
     // Jika keranjang kosong
-    if (!entries.length) {
-        root.innerHTML = 
-            <div class="cart-empty">
-                <div style="font-size:46px">🛒</div>
-                <p>Keranjang masih kosong.</p>
-                <p>Yuk, pilih barang yang kamu butuhkan!</p>
-            </div>
-        ;
 
-        document.getElementById('totalQty').textContent = '0 barang';
-        document.getElementById('totalPrice').textContent = rupiah(0);
+if (!entries.length) {
+    root.innerHTML = `
+        <div class="cart-empty">
+            <div style="font-size:46px">🛒</div>
+            <p>Keranjang masih kosong.</p>
+            <p>Yuk, pilih barang yang kamu butuhkan!</p>
+        </div>
+    `;
 
-        return;
-    }
+    document.getElementById('totalQty').textContent = '0 barang';
+    document.getElementById('totalPrice').textContent = rupiah(0);
+
+    return;
+}
 
     // Tampilkan hanya produk yang masih tersedia di katalog
     const validEntries = entries.filter(([id]) =>
