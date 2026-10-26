@@ -527,7 +527,32 @@ adminForm.addEventListener('submit', async (event) => {
 
 // Isi dengan nomor format internasional tanpa tanda +, contoh: 62812xxxxxxxx
 const WHATSAPP_NUMBER='6289658739582';
-const cart={};let activeCategory='Semua';
+
+// Muat kembali isi keranjang yang tersimpan
+let cart = {};
+
+try {
+  cart = JSON.parse(
+    localStorage.getItem('umiRanisCart') || '{}'
+  );
+} catch (error) {
+  cart = {};
+}
+
+let activeCategory = 'Semua';
+
+// Simpan isi keranjang ke perangkat
+function saveCart() {
+  try {
+    localStorage.setItem(
+      'umiRanisCart',
+      JSON.stringify(cart)
+    );
+  } catch (error) {
+    console.warn('Keranjang tidak bisa disimpan:', error);
+  }
+}
+	
 const rupiah=n=>new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(n);
 function showToast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),1900)}
 function renderProducts(){const query=document.getElementById('search').value.toLowerCase().trim();const list=products.filter(p=>(activeCategory==='Semua'||p.category===activeCategory)&&(p.name+' '+p.category).toLowerCase().includes(query));const root=document.getElementById('products');if(!list.length){root.innerHTML='<div class="empty">Belum ada Produk yang cocok. Coba kata pencarian lain, ya.</div>';return}root.innerHTML=list.map(p=>`<article class="product"><div class="product-art" style="--art:${p.color}">
@@ -537,41 +562,93 @@ function renderProducts(){const query=document.getElementById('search').value.to
 </div><small>${p.category}</small><h4>${p.name}</h4><div class="price-row"><div><div class="price">${rupiah(p.price)}</div><div class="unit">per ${p.unit}</div></div><button class="add" data-add="${p.id}" aria-label="Tambah ${p.name}" ${p.stock<=0?'disabled':''}>+</button></div><div class="stock">${p.stock>0?'Stok contoh: '+p.stock+' '+p.unit:'Stok habis'}</div></article>`).join('')}
 
 // Mengambil Produk dari database Supabase
+// KUNCI PENYIMPANAN KATALOG OFFLINE
+const PRODUCT_CACHE_KEY = 'umiRanisOfflineProducts';
+
 async function loadProducts() {
-  const { data, error } = await supabaseClient
-    .from('Produk')
-    .select('*')
-    .order('id');
+  const root = document.getElementById('products');
 
-  if (error) {
-    console.error('Gagal mengambil Produk:', error);
-    showToast('Produk online gagal dimuat. Cek Console.');
-    return;
+  root.innerHTML =
+    '<div class="empty">Memuat katalog produk...</div>';
+
+  try {
+    // Ambil produk terbaru dari Supabase
+    const { data, error } = await supabaseClient
+      .from('Produk')
+      .select('*')
+      .order('id');
+
+    if (error) {
+      throw error;
+    }
+
+    if (!data || data.length === 0) {
+      throw new Error('Produk Supabase masih kosong.');
+    }
+
+    // Ambil hanya informasi yang dibutuhkan katalog publik.
+    // Jangan menyimpan harga modal atau data admin.
+    products = data.map(p => ({
+      id: Number(p.id),
+      name: p.name,
+      category: p.category,
+      price: Number(p.price),
+      unit: p.unit || '',
+      stock: Number(p.stock ?? 0),
+      emoji: p.emoji || '🛍️',
+      color: p.color || '#e7f4d9',
+      photo_url: p.photo_url || ''
+    }));
+
+    // Simpan salinan katalog untuk digunakan saat offline
+    try {
+      localStorage.setItem(
+        PRODUCT_CACHE_KEY,
+        JSON.stringify(products)
+      );
+      console.log('Salinan katalog offline berhasil disimpan.');
+    } catch (cacheError) {
+      console.warn('Katalog tidak bisa disimpan:', cacheError);
+    }
+
+    renderProducts();
+    renderCart();
+
+    console.log('Produk terbaru berhasil dimuat dari Supabase.');
+
+  } catch (error) {
+    console.warn('Gagal mengambil produk online:', error);
+
+    // Jika internet bermasalah, gunakan katalog yang tersimpan
+    try {
+      const savedProducts = localStorage.getItem(PRODUCT_CACHE_KEY);
+
+      if (savedProducts) {
+        const offlineProducts = JSON.parse(savedProducts);
+
+        if (Array.isArray(offlineProducts) &&
+            offlineProducts.length > 0) {
+          products = offlineProducts;
+          renderProducts();
+          renderCart();
+
+          showToast('Katalog offline berhasil dibuka.');
+
+          console.log('Menggunakan katalog tersimpan.');
+          return;
+        }
+      }
+    } catch (cacheError) {
+      console.error('Gagal membaca katalog offline:', cacheError);
+    }
+
+    // Jangan tampilkan produk contoh seolah-olah data asli
+    products = [];
+    renderProducts();
+
+    showToast('Katalog belum tersimpan. Sambungkan internet dahulu.');
   }
-
-  if (!data || data.length === 0) {
-    console.warn('Belum ada Produk di database.');
-    showToast('Produk di database masih kosong.');
-    return;
-  }
-
-  products = data.map(p => ({
-    ...p,
-    id: Number(p.id),
-    price: Number(p.price),
-    stock: Number(p.stock ?? 0),
-    unit: p.unit || '',
-    emoji: p.emoji || '🛍️',
-    color: p.color || '#e7f4d9',
-    photo_url: p.photo_url || ''
-  }));
-
-  renderProducts();
-  renderCart();
-
-  console.log('Produk berhasil dimuat:', products);
 }
-
 function cartTotals(){let qty=0,total=0;Object.entries(cart).forEach(([id,q])=>{const p=products.find(x=>x.id===Number(id));if(p){qty+=q;total+=p.price*q}});return{qty,total}}
 function renderCart() {
     const root = document.getElementById('cartItems');
@@ -635,8 +712,21 @@ function renderCart() {
 }
 
 function openCart(){document.getElementById('overlay').classList.add('open');renderCart()}function closeCart(){document.getElementById('overlay').classList.remove('open')}
-document.getElementById('products').addEventListener('click',e=>{const b=e.target.closest('[data-add]');if(!b)return;const id=Number(b.dataset.add),p=products.find(x=>x.id===id);if((cart[id]||0)>=p.stock){showToast('Jumlah melebihi stok contoh.');return}cart[id]=(cart[id]||0)+1;renderCart();showToast(p.name+' ditambahkan ke keranjang')});
-document.getElementById('cartItems').addEventListener('click',e=>{const b=e.target.closest('[data-change]');if(!b)return;const id=Number(b.dataset.change),delta=Number(b.dataset.delta),p=products.find(x=>x.id===id);cart[id]=Math.max(0,Math.min(p.stock,(cart[id]||0)+delta));if(!cart[id])delete cart[id];renderCart()});
+document.getElementById('products').addEventListener('click',e=>{const b=e.target.closest('[data-add]');if(!b)return;const id=Number(b.dataset.add),p=products.find(x=>x.id===id);if((cart[id]||0)>=p.stock){showToast('Jumlah melebihi stok contoh.');return}cart[id] = (cart[id] || 0) + 1;
+saveCart();
+renderCart();
+showToast(p.name + ' ditambahkan ke keranjang');});
+document.getElementById('cartItems').addEventListener('click',e=>{const b=e.target.closest('[data-change]');if(!b)return;const id=Number(b.dataset.change),delta=Number(b.dataset.delta),p=products.find(x=>x.id===id);cart[id] = Math.max(
+  0,
+  Math.min(p.stock, (cart[id] || 0) + delta)
+);
+
+if (!cart[id]) {
+  delete cart[id];
+}
+
+saveCart();
+renderCart();});
 document.getElementById('categories').addEventListener('click',e=>{const b=e.target.closest('[data-cat]');if(!b)return;activeCategory=b.dataset.cat;document.querySelectorAll('.cat').forEach(x=>x.classList.toggle('active',x===b));renderProducts()});document.getElementById('search').addEventListener('input',renderProducts);document.getElementById('floatingCart').addEventListener('click',openCart);document.getElementById('closeCart').addEventListener('click',closeCart);document.getElementById('overlay').addEventListener('click',e=>{if(e.target.id==='overlay')closeCart()});
 document.getElementById('checkout').addEventListener('click',()=>{if(!WHATSAPP_NUMBER){showToast('Nomor WhatsApp belum diatur');return}const {total}=cartTotals();const lines=Object.entries(cart).filter(([id,q])=>q>0).map(([id,q],i)=>{const p=products.find(x=>x.id===Number(id));return `${i+1}. ${p.name} — ${q} ${p.unit} = ${rupiah(p.price*q)}`});const msg=`Halo Umi Ranis, saya mau pesan:\n\n${lines.join('\n')}\n\nTotal: ${rupiah(total)}\nMohon konfirmasi pesanan saya. Terima kasih.`;window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank','noopener,noreferrer')});document.getElementById('year').textContent =
   new Date().getFullYear();
