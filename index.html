@@ -650,7 +650,7 @@ async function loadProducts() {
   }
 }
 function cartTotals(){let qty=0,total=0;Object.entries(cart).forEach(([id,q])=>{const p=products.find(x=>x.id===Number(id));if(p){qty+=q;total+=p.price*q}});return{qty,total}}
-```javascript
+
 function renderCart() {
     const root = document.getElementById('cartItems');
     const entries = Object.entries(cart).filter(([id, q]) => q > 0);
@@ -680,32 +680,36 @@ function renderCart() {
         products.some(p => p.id === Number(id))
     );
 
-    root.innerHTML = validEntries.map(([id, q]) => {
-        const p = products.find(x => x.id === Number(id));
+root.innerHTML = validEntries.map(([id, q]) => {
+    const p = products.find(x => x.id === Number(id));
 
-```javascript
-return `
-    <div class="cart-item">
-        <div>
-            <strong>${p.name}</strong>
-            <small>
-                ${rupiah(p.price)} × ${q} = ${rupiah(p.price * q)}
-            </small>
+    if (!p) {
+        return '';
+    }
+
+    return `
+        <div class="cart-item">
+            <div>
+                <strong>${p.name}</strong>
+                <small>
+                    ${rupiah(p.price)} × ${q} = ${rupiah(p.price * q)}
+                </small>
+            </div>
+
+            <div class="qty">
+                <button data-change="${id}" data-delta="-1"
+                    aria-label="Kurangi">−</button>
+
+                <strong>${q}</strong>
+
+                <button data-change="${id}" data-delta="1"
+                    aria-label="Tambah">+</button>
+            </div>
         </div>
+    `;
+}).join('');
 
-        <div class="qty">
-            <button data-change="${id}" data-delta="-1"
-                aria-label="Kurangi">−</button>
-
-            <strong>${q}</strong>
-
-            <button data-change="${id}" data-delta="1"
-                aria-label="Tambah">+</button>
-        </div>
-    </div>
-`;
-	}).join('');
-
+	
     // Hitung ulang total berdasarkan produk yang tersedia
     const validQty = validEntries.reduce((sum, [, q]) => sum + q, 0);
 
