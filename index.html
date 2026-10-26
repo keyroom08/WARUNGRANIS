@@ -573,10 +573,10 @@ async function loadProducts() {
 
   try {
     // Ambil produk terbaru dari Supabase
-    const { data, error } = await supabaseClient
-      .from('Produk')
-      .select('*')
-      .order('id');
+const { data, error } = await supabaseClient
+  .from('Produk')
+  .select('id,name,category,price,stock,unit,emoji,color,photo_url')
+  .order('id', { ascending: true });
 
     if (error) {
       throw error;
