@@ -661,13 +661,13 @@ function renderCart() {
 
     // Jika keranjang kosong
     if (!entries.length) {
-        root.innerHTML = `
+        root.innerHTML = 
             <div class="cart-empty">
                 <div style="font-size:46px">🛒</div>
                 <p>Keranjang masih kosong.</p>
                 <p>Yuk, pilih barang yang kamu butuhkan!</p>
             </div>
-        `;
+        ;
 
         document.getElementById('totalQty').textContent = '0 barang';
         document.getElementById('totalPrice').textContent = rupiah(0);
