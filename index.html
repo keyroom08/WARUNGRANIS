@@ -663,7 +663,6 @@ backToTopButton.addEventListener('click', () => {
     });
 });
 
-```html
 </script>
 
 <script>
@@ -674,10 +673,7 @@ if ("serviceWorker" in navigator) {
         console.log("PWA Warung Ranis berhasil disiapkan.");
       })
       .catch(error => {
-        console.error(
-          "Service Worker gagal didaftarkan:",
-          error
-        );
+        console.error("Service Worker gagal didaftarkan:", error);
       });
   });
 }
@@ -685,4 +681,3 @@ if ("serviceWorker" in navigator) {
 
 </body>
 </html>
-```
