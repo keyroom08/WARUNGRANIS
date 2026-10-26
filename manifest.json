@@ -1,9 +1,8 @@
-```json
 {
   "id": "./",
   "name": "Warung Umi Ranis",
   "short_name": "Umi Ranis",
-  "description": "Katalog belanja kebutuhan sehari-hari Warung Umi Ranis",
+  "description": "Katalog belanja Warung Umi Ranis",
   "lang": "id-ID",
   "start_url": "./",
   "scope": "./",
@@ -23,4 +22,3 @@
     }
   ]
 }
-```
